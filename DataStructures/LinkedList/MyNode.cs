@@ -1,8 +1,8 @@
 ﻿namespace DataStructures.LinkedList
 {
-    internal class Node<T>
+    internal class MyNode<T>
     {
-        public Node(T value)
+        public MyNode(T value)
         {
             Value = value;
             Next = null;
@@ -10,6 +10,6 @@
         
         public T Value { get; }
 
-        public Node<T> Next { get; set; }
+        public MyNode<T> Next { get; set; }
     }
 }
