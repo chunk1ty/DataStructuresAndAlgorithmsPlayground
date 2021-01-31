@@ -1,30 +1,31 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
-namespace DataStructures.LinkedList
+namespace DataStructures.DoublyLinkedList
 {
-    public class MyLinkedList<T> : IEnumerable<T>
+    public class MyDoublyLinkedList<T> : IEnumerable<T>
     {
+        private int _count;
         private MyNode<T> _head;
         private MyNode<T> _tail;
-        private int _count; 
-        
-        public MyLinkedList()
+
+        public MyDoublyLinkedList()
         {
+            _count = 0;
             _head = null;
             _tail = null;
-            _count = 0;
         }
 
         /// <summary>
         /// The first node value in the list or default if empty
         /// </summary>
-        public T Head => _head == null ? default(T) : _head.Value;
+        public T HeadValue => _head == null ? default(T) : _head.Value;
 
         /// <summary>
         /// The last node value in the list or default if empty
         /// </summary>
-        public T Tail => _tail == null ? default(T) : _tail.Value;
+        public T TailValue => _tail == null ? default(T) : _tail.Value;
 
         /// <summary>
         /// The number of items currently in the list
@@ -32,7 +33,7 @@ namespace DataStructures.LinkedList
         public int Count => _count;
 
         /// <summary>
-        /// Add value to the start(HEAD) of link list.
+        /// Add value to the start(HEAD) of doubly link list.
         /// </summary>
         /// <param name="value"></param>
         public void AddFirst(T value)
@@ -41,12 +42,13 @@ namespace DataStructures.LinkedList
 
             if (_count == 0)
             {
-                _tail = newNode;
                 _head = newNode;
+                _tail = newNode;
             }
             else
             {
                 newNode.Next = _head;
+                _head.Previous = newNode;
                 _head = newNode;
             }
 
@@ -54,7 +56,7 @@ namespace DataStructures.LinkedList
         }
 
         /// <summary>
-        /// Add value to the end(TAIL) of link list.
+        /// Add value to the end(TAIL) of doubly link list.
         /// </summary>
         /// <param name="value"></param>
         public void AddLast(T value)
@@ -68,33 +70,35 @@ namespace DataStructures.LinkedList
             }
             else
             {
+                newNode.Previous = _tail;
                 _tail.Next = newNode;
                 _tail = newNode;
             }
-            
+
             _count++;
         }
 
         /// <summary>
         /// Remove the first item(HEAD) from the list.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>True if the item is removed, false otherwise.</returns>
         public bool RemoveFirst()
         {
             if (_count <= 0)
             {
                 return false;
             }
-            
-            // Before: Head -> 3 -> 5
-            // After:  Head ------> 5
-            _head = _head.Next;
-            _count--;
-            
-            if (_count == 0)
+
+            if (_count == 1)
             {
-                _tail = null;
+                Clear();
+                return true;
             }
+
+            _head = _head.Next;
+            _head.Previous = null;
+
+            _count--;
 
             return true;
         }
@@ -102,7 +106,7 @@ namespace DataStructures.LinkedList
         /// <summary>
         /// Remove the last item(TAIL) from the list.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>True if the item is removed, false otherwise.</returns>
         public bool RemoveLast()
         {
             if (_count <= 0)
@@ -112,74 +116,26 @@ namespace DataStructures.LinkedList
 
             if (_count == 1)
             {
-                _head = null;
-                _tail = null;
+                Clear();
+                return true;
             }
-            else
-            {
-                // Before: Head --> 3 --> 5 --> 7
-                //         Tail = 7
-                // After:  Head --> 3 --> 5 --> null
-                //         Tail = 5
-                MyNode<T> currentMyNode = _head;
 
-                while (currentMyNode.Next != _tail)
-                {
-                    currentMyNode = currentMyNode.Next;
-                }
+            _tail = _tail.Previous;
+            _tail.Next = null;
 
-                currentMyNode.Next = null;
-                _tail = currentMyNode;
-            }
-            
             _count--;
 
             return true;
         }
 
         /// <summary>
-        /// Remove the first occurrence of the item from the list.
+        /// Removes the first occurrence of the item from the list (searching from Head to Tail).
         /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
+        /// <param name="item">The item to remove</param>
+        /// <returns>True if the item was found and removed, false otherwise</returns>
         public bool Remove(T value)
         {
-            MyNode<T> current = _head;
-            MyNode<T> previous = null;
-            
-            // 1: Empty list - do nothing
-            // 2: Single node: (previous is null)
-            // 3: Many nodes
-            //    a: node to remove is the first node
-            //    b: node to remove is the middle or last
-            while (current != null)
-            {
-                if (current.Value.Equals(value))
-                {
-                    if (previous == null)
-                    {
-                        // case 2
-                        return RemoveFirst();
-                    }
-
-                    // case 3a & 3b
-                    previous.Next = current.Next;
-
-                    if (current.Next == null)
-                    {
-                        _tail = previous;
-                    }
-
-                    _count--;
-
-                    return true;
-                }
-
-                previous = current;
-                current = current.Next;
-            }
-
-            return false;
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -215,9 +171,9 @@ namespace DataStructures.LinkedList
 
         public IEnumerator<T> GetEnumerator()
         {
-            for (MyNode<T> current = _head; current != null; current = current.Next)
+            for (MyNode<T> currentNode = _head; currentNode != null; currentNode = currentNode.Next)
             {
-                yield return current.Value;
+                yield return currentNode.Value;
             }
         }
 

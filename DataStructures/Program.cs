@@ -1,4 +1,5 @@
-﻿using DataStructures.LinkedList;
+﻿using DataStructures.DoublyLinkedList;
+using DataStructures.LinkedList;
 
 namespace DataStructures
 {
@@ -6,7 +7,8 @@ namespace DataStructures
     {
         internal static void Main()
         {
-            MyLinkedListPlaygrounder.Play();
+            // MyLinkedListPlaygrounder.Play();
+            MyDoublyLinkedListPlaygrounder.Play();
         }
     }
 }
