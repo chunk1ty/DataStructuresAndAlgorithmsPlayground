@@ -6,16 +6,18 @@ namespace DataStructures.Stack
 {
     public class MyStack<T> : IEnumerable<T>
     {
-        private const int InitialSize = 4;
+        private const int DefaultCapacity = 4;
         private const int GrowthFactor = 2;
         
-        private int _index = 0;
-        private T[] _items = new T[InitialSize];
+        // Number of items in the stack.
+        private int _size;
+        // Storage for stack elements.
+        private T[] _items = new T[DefaultCapacity];
         
         /// <summary>
         /// The current number of items in the stack
         /// </summary>
-        public int Count => _index;
+        public int Count => _size;
 
         /// <summary>
         /// Adds item to the stack
@@ -23,18 +25,18 @@ namespace DataStructures.Stack
         /// <param name="item">The item</param>
         public void Push(T item)
         {
-            if (_index == _items.Length)
+            if (_size == _items.Length)
             {
                 ResizeArray();
             }
             
-            _items[_index] = item;
-            _index++;
+            _items[_size] = item;
+            _size++;
         }
 
         private void ResizeArray()
         {
-            T[] newArray = new T[_index * GrowthFactor];
+            T[] newArray = new T[_size * GrowthFactor];
             for (int index = 0; index < _items.Length; index++)
             {
                 newArray[index] = _items[index];
@@ -51,7 +53,7 @@ namespace DataStructures.Stack
         {
             T topItem = Peek();
             
-            _index--;
+            _size--;
             
             return topItem;
         }
@@ -62,12 +64,12 @@ namespace DataStructures.Stack
         /// <returns>The top-most item in the stack</returns>
         public T Peek()
         {
-            if (_index == 0)
+            if (_size == 0)
             {
                 throw new InvalidOperationException("The stack is empty");
             }
 
-            return _items[_index - 1];
+            return _items[_size - 1];
         }
 
         /// <summary>
@@ -75,7 +77,7 @@ namespace DataStructures.Stack
         /// </summary>
         public void Clear()
         {
-            _index = 0;
+            _size = 0;
         }
 
         /// <summary>
