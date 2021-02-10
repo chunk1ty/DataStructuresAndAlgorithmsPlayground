@@ -2,35 +2,39 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace DataStructures.Stack
+namespace DataStructures.Queue
 {
-    public class MyStack<T> : IEnumerable<T>
+    public class MyQueue<T> : IEnumerable<T>
     {
         private const int DefaultCapacity = 4;
         private const int GrowthFactor = 2;
-        
-        // Number of items in the stack.
+
         private int _size;
-        // Storage for stack elements.
+        // Storage for queue elements.
+        // N.B: Can be implemented with LinkedList as well
         private T[] _array = new T[DefaultCapacity];
         
-        /// <summary>
-        /// The current number of items in the stack
-        /// </summary>
-        public int Count => _size;
+        private int _head;
+        private int _tail;
 
         /// <summary>
-        /// Adds item to the stack
+        /// The current number of items in the queue
+        /// </summary>
+        public int Count => _size;
+        
+        /// <summary>
+        /// Adds item to the queue.
         /// </summary>
         /// <param name="item">The item</param>
-        public void Push(T item)
+        public void Enqueue(T item)
         {
             if (_size == _array.Length)
             {
                 ResizeArray();
             }
             
-            _array[_size] = item;
+            _array[_tail] = item;
+            _tail++;
             _size++;
         }
 
@@ -46,47 +50,50 @@ namespace DataStructures.Stack
         }
 
         /// <summary>
-        /// Removes and returns the top item from the stack
+        /// Removes and returns the first item from the queue
         /// </summary>
         /// <returns>The top-most item in the stack</returns>
-        public T Pop()
+        public T Dequeue()
         {
-            T topItem = Peek();
+            T removedItem = Peek();
             
+            _head++;
             _size--;
-            
-            return topItem;
-        }
 
+            return removedItem;
+        }
+        
         /// <summary>
-        /// Returns the top item from the stack without removing it from the stack
+        /// Returns the first item from the queue without removing it from the stack
         /// </summary>
-        /// <returns>The top-most item in the stack</returns>
+        /// <returns>The first item in the queue</returns>
         public T Peek()
         {
             if (_size == 0)
             {
-                throw new InvalidOperationException("The stack is empty");
+                throw new InvalidOperationException("The queue is empty");
             }
-
-            return _array[_size - 1];
+            
+            return _array[_head];
         }
-
+        
         /// <summary>
-        /// Removes all items from the stack
+        /// Removes all items from the queue
         /// </summary>
         public void Clear()
         {
             _size = 0;
+            _head = 0;
+            _tail = 0;
         }
 
         /// <summary>
-        /// Enumerates each item in the stack in LIFO order.
+        /// Enumerates each item in the queue in FIFO order.
         /// </summary>
-        /// <returns>The LIFO enumerator</returns>
+        /// <returns>The FIFO enumerator</returns>
         public IEnumerator<T> GetEnumerator()
         {
-            for (int index = Count-1; index >= 0; index--)
+            for (int index = _head; index < _tail; index++)
             {
                 yield return _array[index];
             }

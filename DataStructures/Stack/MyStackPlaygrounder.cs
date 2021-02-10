@@ -25,7 +25,6 @@ namespace DataStructures.Stack
             myStack.Push(2);
             myStack.Push(3);
             myStack.Push(4);
-            myStack.Clear();
             foreach (var item in myStack)
             {
                 Console.WriteLine(item);
