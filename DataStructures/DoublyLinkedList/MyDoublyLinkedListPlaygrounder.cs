@@ -9,10 +9,10 @@ namespace DataStructures.DoublyLinkedList
         {
             MyDoublyLinkedList<int> myDoublyLinkedList = new MyDoublyLinkedList<int>();
             
-            myDoublyLinkedList.AddLast(1);
-            myDoublyLinkedList.AddLast(2);
+            myDoublyLinkedList.AddTail(1);
+            myDoublyLinkedList.AddTail(2);
             // myDoublyLinkedList.AddLast(3);
-            myDoublyLinkedList.AddFirst(0);
+            myDoublyLinkedList.AddHead(0);
             // myDoublyLinkedList.AddLast(4);
             // myDoublyLinkedList.AddFirst(-1);
             // myDoublyLinkedList.AddFirst(-2);

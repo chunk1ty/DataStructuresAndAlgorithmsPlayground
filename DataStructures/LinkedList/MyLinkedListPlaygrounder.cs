@@ -8,14 +8,14 @@ namespace DataStructures.LinkedList
         {
             MyLinkedList<int> myLinkedList = new MyLinkedList<int>();
             
-            myLinkedList.AddLast(1);
-            myLinkedList.AddLast(2);
-            myLinkedList.AddLast(3);
-            myLinkedList.AddFirst(0);
-            myLinkedList.AddLast(4);
-            myLinkedList.AddFirst(-1);
-            myLinkedList.AddFirst(-2);
-            myLinkedList.AddLast(5);
+            myLinkedList.AddTail(1);
+            myLinkedList.AddTail(2);
+            myLinkedList.AddTail(3);
+            myLinkedList.AddHead(0);
+            myLinkedList.AddTail(4);
+            myLinkedList.AddHead(-1);
+            myLinkedList.AddHead(-2);
+            myLinkedList.AddTail(5);
             
             // myLinkedList.RemoveFirst();
             // myLinkedList.RemoveLast();
