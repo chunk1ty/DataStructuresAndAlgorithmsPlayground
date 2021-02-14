@@ -35,7 +35,7 @@ namespace DataStructures.LinkedList
         /// Add value to the start(HEAD) of link list.
         /// </summary>
         /// <param name="value"></param>
-        public void AddHead(T value)
+        public void AddFirst(T value)
         {
             var newNode = new MyNode<T>(value);
 
@@ -46,7 +46,7 @@ namespace DataStructures.LinkedList
             }
             else
             {
-                newNode.Next = _head;
+                newNode.Next = _head;                
                 _head = newNode;
             }
 
@@ -57,7 +57,7 @@ namespace DataStructures.LinkedList
         /// Add value to the end(TAIL) of link list.
         /// </summary>
         /// <param name="value"></param>
-        public void AddTail(T value)
+        public void AddLast(T value)
         {
             var newNode = new MyNode<T>(value);
 

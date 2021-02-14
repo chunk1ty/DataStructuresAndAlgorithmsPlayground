@@ -19,7 +19,7 @@ namespace DataStructures.Tests
             MyLinkedList<int> myLinkedList = new MyLinkedList<int>();
             for (int i = 1; i <= 5; i++)
             {
-                myLinkedList.AddHead(i);
+                myLinkedList.AddFirst(i);
             }
 
             int expected = 5;
@@ -36,7 +36,7 @@ namespace DataStructures.Tests
             MyLinkedList<int> myLinkedList = new MyLinkedList<int>();
             for (int i = 1; i <= 5; i++)
             {
-                myLinkedList.AddTail(i);
+                myLinkedList.AddLast(i);
             }
 
             int expected = 1;
@@ -85,7 +85,7 @@ namespace DataStructures.Tests
             MyLinkedList<int> ints = new MyLinkedList<int>();
             for (int i = start; i <= end; i++)
             {
-                ints.AddTail(i);
+                ints.AddLast(i);
             }
 
             return ints;
