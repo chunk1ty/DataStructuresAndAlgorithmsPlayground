@@ -36,7 +36,7 @@ namespace DataStructures.DoublyLinkedList
         /// Add value to the start(HEAD) of doubly link list.
         /// </summary>
         /// <param name="value"></param>
-        public void AddHead(T value)
+        public void AddFirst(T value)
         {
             var newNode = new MyNode<T>(value);
 
@@ -59,7 +59,7 @@ namespace DataStructures.DoublyLinkedList
         /// Add value to the end(TAIL) of doubly link list.
         /// </summary>
         /// <param name="value"></param>
-        public void AddTail(T value)
+        public void AddLast(T value)
         {
             var newNode = new MyNode<T>(value);
 
