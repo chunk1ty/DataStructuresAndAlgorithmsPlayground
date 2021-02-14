@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace DataStructures.LinkedList
 {
@@ -6,6 +7,7 @@ namespace DataStructures.LinkedList
     {
         public static void Play()
         {
+            LinkedList<int> linkedList = new LinkedList<int>();
             MyLinkedList<int> myLinkedList = new MyLinkedList<int>();
             
             myLinkedList.AddTail(1);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace DataStructures.Queue
 {
@@ -6,6 +7,7 @@ namespace DataStructures.Queue
     {
         public static void Play()
         {
+            Queue<int> queue = new Queue<int>();
             MyQueue<int> myQueue = new MyQueue<int>();
             
             myQueue.Enqueue(1);

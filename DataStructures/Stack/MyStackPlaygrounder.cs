@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace DataStructures.Stack
 {
@@ -6,6 +7,7 @@ namespace DataStructures.Stack
     {
         public static void Play()
         {
+            Stack<int> stack = new Stack<int>();
             MyStack<int> myStack = new MyStack<int>();
 
             // myStack.Peek();
@@ -25,6 +27,7 @@ namespace DataStructures.Stack
             myStack.Push(2);
             myStack.Push(3);
             myStack.Push(4);
+            
             foreach (var item in myStack)
             {
                 Console.WriteLine(item);
