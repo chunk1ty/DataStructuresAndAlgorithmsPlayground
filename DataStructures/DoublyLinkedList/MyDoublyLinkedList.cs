@@ -6,13 +6,13 @@ namespace DataStructures.DoublyLinkedList
 {
     public class MyDoublyLinkedList<T> : IEnumerable<T>
     {
-        private int _count;
+        private int _size;
         private MyNode<T> _head;
         private MyNode<T> _tail;
 
         public MyDoublyLinkedList()
         {
-            _count = 0;
+            _size = 0;
             _head = null;
             _tail = null;
         }
@@ -20,17 +20,17 @@ namespace DataStructures.DoublyLinkedList
         /// <summary>
         /// The first node value in the list or default if empty
         /// </summary>
-        public T HeadValue => _head == null ? default(T) : _head.Value;
+        public MyNode<T> Head => _head;
 
         /// <summary>
         /// The last node value in the list or default if empty
         /// </summary>
-        public T TailValue => _tail == null ? default(T) : _tail.Value;
+        public MyNode<T> Tail => _tail;
 
         /// <summary>
         /// The number of items currently in the list
         /// </summary>
-        public int Count => _count;
+        public int Count => _size;
 
         /// <summary>
         /// Add value to the start(HEAD) of doubly link list.
@@ -40,7 +40,7 @@ namespace DataStructures.DoublyLinkedList
         {
             var newNode = new MyNode<T>(value);
 
-            if (_count == 0)
+            if (_size == 0)
             {
                 _head = newNode;
                 _tail = newNode;
@@ -52,7 +52,7 @@ namespace DataStructures.DoublyLinkedList
                 _head = newNode;
             }
 
-            _count++;
+            _size++;
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace DataStructures.DoublyLinkedList
         {
             var newNode = new MyNode<T>(value);
 
-            if (_count == 0)
+            if (_size == 0)
             {
                 _head = newNode;
                 _tail = newNode;
@@ -75,7 +75,59 @@ namespace DataStructures.DoublyLinkedList
                 _tail = newNode;
             }
 
-            _count++;
+            _size++;
+        }
+
+        /// <summary>
+        /// Add value before node.
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="value"></param>
+        public void AddBefore(MyNode<T> node, T value)
+        {
+            var newNode = new MyNode<T>(value);
+
+            newNode.Next = node;
+            newNode.Previous = node.Previous;
+
+            if (node.Previous is null)
+            {
+                _head = newNode;
+                node.Previous = newNode;
+            }
+            else
+            {
+                node.Previous.Next = newNode;
+                node.Previous = newNode;
+            }
+
+            _size++;
+        }
+        
+        /// <summary>
+        /// Add value after node.
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="value"></param>
+        public void AddAfter(MyNode<T> node, T value)
+        {
+            var newNode = new MyNode<T>(value);
+
+            newNode.Next = node.Next;
+            newNode.Previous = node;
+
+            if (node.Next is null)
+            {
+                _tail = newNode;
+                node.Next = newNode;
+            }
+            else
+            {
+                node.Next.Previous = newNode;
+                node.Next = newNode;
+            }
+
+            _size++;
         }
 
         /// <summary>
@@ -84,12 +136,12 @@ namespace DataStructures.DoublyLinkedList
         /// <returns>True if the item is removed, false otherwise.</returns>
         public bool RemoveFirst()
         {
-            if (_count <= 0)
+            if (_size <= 0)
             {
                 return false;
             }
 
-            if (_count == 1)
+            if (_size == 1)
             {
                 Clear();
                 return true;
@@ -98,7 +150,7 @@ namespace DataStructures.DoublyLinkedList
             _head = _head.Next;
             _head.Previous = null;
 
-            _count--;
+            _size--;
 
             return true;
         }
@@ -109,12 +161,12 @@ namespace DataStructures.DoublyLinkedList
         /// <returns>True if the item is removed, false otherwise.</returns>
         public bool RemoveLast()
         {
-            if (_count <= 0)
+            if (_size <= 0)
             {
                 return false;
             }
 
-            if (_count == 1)
+            if (_size == 1)
             {
                 Clear();
                 return true;
@@ -123,7 +175,7 @@ namespace DataStructures.DoublyLinkedList
             _tail = _tail.Previous;
             _tail.Next = null;
 
-            _count--;
+            _size--;
 
             return true;
         }
@@ -166,7 +218,7 @@ namespace DataStructures.DoublyLinkedList
         {
             _head = null;
             _tail = null;
-            _count = 0;
+            _size = 0;
         }
 
         public IEnumerator<T> GetEnumerator()

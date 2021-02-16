@@ -12,10 +12,10 @@ namespace DataStructures
         internal static void Main()
         {
             // MyLinkedListPlaygrounder.Play();
-            // MyDoublyLinkedListPlaygrounder.Play();
+            MyDoublyLinkedListPlaygrounder.Play();
             // MyStackPlaygrounder.Play();
             // MyQueuePlaygrounder.Play();
-            MyListPlaygrounder.Play();
+            // MyListPlaygrounder.Play();
         }
     }
 }

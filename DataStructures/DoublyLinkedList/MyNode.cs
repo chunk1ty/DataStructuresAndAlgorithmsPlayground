@@ -1,6 +1,6 @@
 ﻿namespace DataStructures.DoublyLinkedList
 {
-    internal class MyNode<T>
+    public class MyNode<T>
     {
         public MyNode(T value)
         {
