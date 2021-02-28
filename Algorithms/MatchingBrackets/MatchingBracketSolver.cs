@@ -10,6 +10,7 @@ namespace Algorithms.MatchingBrackets
             var stack = new Stack<int>();
             for (int index = 0; index < expression.Length; index++)
             {
+            
                 if (expression[index] is '(')
                 {
                     stack.Push(index);
