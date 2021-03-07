@@ -1,4 +1,5 @@
-﻿using Algorithms.MatchingBrackets;
+﻿using Algorithms.Combinatorics;
+using Algorithms.MatchingBrackets;
 using BenchmarkDotNet.Running;
 
 namespace Algorithms
@@ -7,9 +8,10 @@ namespace Algorithms
     {
         public static void Main(string[] args)
         {
-             BenchmarkRunner.Run(typeof(Program).Assembly);
+            // BenchmarkRunner.Run(typeof(Program).Assembly);
             // MatchingBracketPlayground.Play();
             
+            CombinatoricPlaygrounder.Play();
         }
     }
 }
