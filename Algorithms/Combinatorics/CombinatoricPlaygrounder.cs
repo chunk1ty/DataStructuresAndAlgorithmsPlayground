@@ -4,7 +4,7 @@
     {
         public static void Play()
         {
-            PermutationGenerator.Generate(5);
+            Permutator.Permute(new[] {'A', 'B', 'C'});
         }
     }
 }
