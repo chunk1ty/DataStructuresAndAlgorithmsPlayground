@@ -3,6 +3,7 @@
 namespace Algorithms.Combinatorics
 {
     // https://stackoverflow.com/questions/756055/listing-all-permutations-of-a-string-integer
+    // How many ways are there to arrange 3 letters?
     public class Permutator
     {
         private static int _n; 
@@ -10,24 +11,28 @@ namespace Algorithms.Combinatorics
         public static void Permute(char[] items)
         {
             _n = items.Length;
-            _Permute(0, items);
+            PermutationWithoutRepetitions(0, items);
         }
 
-        private static void _Permute(int currentIndex, char[] items)
+        private static void PermutationWithoutRepetitions(int currentIndex, char[] items)
         {
+            Console.WriteLine("Items: " + string.Join(" ", items));
+            
             if (currentIndex == _n)
             {
-                Console.WriteLine(string.Join(" ", items));
+                Console.WriteLine("Result: " + string.Join(" ", items));
                 return;
             }
 
             for (int index = currentIndex; index < _n; index++)
             {
                 Swap(ref items[currentIndex], ref items[index]);
+                Console.WriteLine($"Swap BEFORE recursion: (cI [{currentIndex}], i [{index}]) values: (cI [{items[currentIndex]}], i [{items[index]}]) ");
                 
-                _Permute(currentIndex + 1, items);
+                PermutationWithoutRepetitions(currentIndex + 1, items);
                 
                 Swap(ref items[currentIndex], ref items[index]);
+                Console.WriteLine($"Swap AFTER recursion: (cI [{currentIndex}], i [{index}]) values: (cI [{items[currentIndex]}], i [{items[index]}]) ");
             }
         }
 

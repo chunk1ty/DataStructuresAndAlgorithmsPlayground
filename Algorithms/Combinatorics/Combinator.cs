@@ -2,6 +2,7 @@
 
 namespace Algorithms.Combinatorics
 {
+    // How many ways are there to pick 2 different letters out of 4 letters?
     public class Combinator
     {
         private static char[] _items;
@@ -16,10 +17,11 @@ namespace Algorithms.Combinatorics
             _n = items.Length;
             _items = items;
             _p = p;
-            GenerateCombinationsNoRepetitions(0, 0);
+            
+            CombinationsWithoutRepetitions(0, 0);
         }
 
-        private static void GenerateCombinationsNoRepetitions(int index, int start)
+        private static void CombinationsWithoutRepetitions(int index, int start)
         {
             if (index >= _p)
             {
@@ -27,15 +29,15 @@ namespace Algorithms.Combinatorics
                 {
                     Console.Write(_items[combinationIndex] + " ");
                 }
-
+        
                 Console.WriteLine(" ");
                 return;
             }
-
+        
             for (int i = start; i < _n; i++)
             {
                 _combinationIndexes[index] = i;
-                GenerateCombinationsNoRepetitions(index + 1, i + 1);
+                CombinationsWithoutRepetitions(index + 1, i + 1);
             }
         }
     }
