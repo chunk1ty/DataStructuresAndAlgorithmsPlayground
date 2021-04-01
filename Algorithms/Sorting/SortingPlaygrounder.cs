@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Algorithms.Sorting
 {
@@ -8,8 +7,8 @@ namespace Algorithms.Sorting
     {
         public static void Play()
         {
-            ISorter sorter = new SelectionSorter();
-            List<int> numbers = GenerateRandomNumbers(100);
+            ISorter sorter = new InsertionSorter();
+            List<int> numbers = GenerateRandomNumbers(10);
             Console.WriteLine(string.Join(' ', numbers));
 
             sorter.Sort(numbers);
@@ -22,9 +21,9 @@ namespace Algorithms.Sorting
             var numbers = new List<int>();
             Random random = new Random();
 
-            for (int i = 0; i < maxNumbers; i++)
+            for (int i = 1; i < maxNumbers; i++)
             {
-                numbers.Add(random.Next(i, i * 3));
+                numbers.Add(random.Next(i, i + 100));
             }
 
             return numbers;
