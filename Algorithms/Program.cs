@@ -1,5 +1,6 @@
 ﻿using Algorithms.Combinatorics;
 using Algorithms.MatchingBrackets;
+using Algorithms.Sorting;
 using BenchmarkDotNet.Running;
 
 namespace Algorithms
@@ -10,8 +11,10 @@ namespace Algorithms
         {
             // BenchmarkRunner.Run(typeof(Program).Assembly);
             // MatchingBracketPlayground.Play();
-            
-            CombinatoricPlaygrounder.Play();
+
+            // CombinatoricPlaygrounder.Play();
+
+            SortingPlaygrounder.Play();
         }
     }
 }
