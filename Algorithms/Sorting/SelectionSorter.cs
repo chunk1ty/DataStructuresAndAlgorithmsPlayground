@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Algorithms.Sorting
 {
-    public class SelectionSorter
+    public class SelectionSorter : ISorter
     {
         public void Sort<T>(IList<T> collection) where T : IComparable<T>
         {
@@ -32,7 +32,6 @@ namespace Algorithms.Sorting
                     collection[i] = temp;
                 }
             }
-           
         }
     }
 }

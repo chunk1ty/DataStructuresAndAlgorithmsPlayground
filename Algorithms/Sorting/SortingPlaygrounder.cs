@@ -8,11 +8,11 @@ namespace Algorithms.Sorting
     {
         public static void Play()
         {
-            SelectionSorter selectionSorter = new SelectionSorter();
+            ISorter sorter = new SelectionSorter();
             List<int> numbers = GenerateRandomNumbers(100);
             Console.WriteLine(string.Join(' ', numbers));
 
-            selectionSorter.Sort(numbers);
+            sorter.Sort(numbers);
             Console.WriteLine("#######################################");
             Console.WriteLine(string.Join(' ', numbers));
         }
