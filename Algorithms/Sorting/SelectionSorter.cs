@@ -7,7 +7,7 @@ namespace Algorithms.Sorting
     {
         public void Sort<T>(IList<T> collection) where T : IComparable<T>
         {
-            if (collection.Count == 0 || collection.Count == 1)
+            if (collection.Count <= 1)
             {
                 return;
             }

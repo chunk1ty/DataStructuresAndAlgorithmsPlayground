@@ -7,7 +7,7 @@ namespace Algorithms.Sorting
     {
         public static void Play()
         {
-            ISorter sorter = new InsertionSorter();
+            ISorter sorter = new MergeSorter();
             List<int> numbers = GenerateRandomNumbers(10);
             Console.WriteLine(string.Join(' ', numbers));
 
