@@ -19,8 +19,8 @@ namespace DataStructures.LinkedList
             myLinkedList.AddFirst(-2);
             myLinkedList.AddLast(5);
             
-            // myLinkedList.RemoveFirst();
-            // myLinkedList.RemoveLast();
+            // myLinkedList.RemoveHead();
+            // myLinkedList.RemoveTail();
             // Console.WriteLine(myLinkedList.Remove(0));
             Console.WriteLine(myLinkedList.Contains(0));
 

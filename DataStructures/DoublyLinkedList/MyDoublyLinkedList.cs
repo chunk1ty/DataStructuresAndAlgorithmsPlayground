@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 
 namespace DataStructures.DoublyLinkedList
@@ -33,10 +32,10 @@ namespace DataStructures.DoublyLinkedList
         public int Count => _size;
 
         /// <summary>
-        /// Add value to the start(HEAD) of doubly link list.
+        /// Add value to the beginning of doubly link list.
         /// </summary>
         /// <param name="value"></param>
-        public void AddFirst(T value)
+        public void AddToHead(T value)
         {
             var newNode = new MyNode<T>(value);
 
@@ -56,10 +55,10 @@ namespace DataStructures.DoublyLinkedList
         }
 
         /// <summary>
-        /// Add value to the end(TAIL) of doubly link list.
+        /// Add value to the end of doubly link list.
         /// </summary>
         /// <param name="value"></param>
-        public void AddLast(T value)
+        public void AddToTail(T value)
         {
             var newNode = new MyNode<T>(value);
 
@@ -131,10 +130,10 @@ namespace DataStructures.DoublyLinkedList
         }
 
         /// <summary>
-        /// Remove the first item(HEAD) from the list.
+        /// Remove the first item from the list.
         /// </summary>
         /// <returns>True if the item is removed, false otherwise.</returns>
-        public bool RemoveFirst()
+        public bool RemoveHead()
         {
             if (_size <= 0)
             {
@@ -156,10 +155,10 @@ namespace DataStructures.DoublyLinkedList
         }
 
         /// <summary>
-        /// Remove the last item(TAIL) from the list.
+        /// Removes the last item from the list.
         /// </summary>
         /// <returns>True if the item is removed, false otherwise.</returns>
-        public bool RemoveLast()
+        public bool RemoveTail()
         {
             if (_size <= 0)
             {
@@ -187,7 +186,34 @@ namespace DataStructures.DoublyLinkedList
         /// <returns>True if the item was found and removed, false otherwise</returns>
         public bool Remove(T value)
         {
-            throw new NotImplementedException();
+            MyNode<T> current = _head;
+
+            while (current != null)
+            {
+                if (current.Value.Equals(value))
+                {
+                    if (current.Previous is null)
+                    {
+                        return RemoveHead();
+                    }
+
+                    if(current.Next is null)
+                    {
+                        return RemoveTail();
+                    }
+
+                    current.Previous.Next = current.Next;
+                    current.Next.Previous = current.Previous;
+
+                    _size--;
+
+                    return true;
+                }
+
+                current = current.Next;
+            }
+
+            return false;
         }
 
         /// <summary>
