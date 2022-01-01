@@ -1,15 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-namespace DataStructures.LinkedList
+namespace DataStructures.SinglyLinkedList
 {
-    public class MyLinkedList<T> : IEnumerable<T>
+    public class MySinglyLinkedList<T> : IEnumerable<T>
     {
         private MyNode<T> _head;
         private MyNode<T> _tail;
         private int _count; 
         
-        public MyLinkedList()
+        public MySinglyLinkedList()
         {
             _head = null;
             _tail = null;
@@ -32,10 +32,10 @@ namespace DataStructures.LinkedList
         public int Count => _count;
 
         /// <summary>
-        /// Add value to the start(HEAD) of link list.
+        /// Adds value to the beginning of link list.
         /// </summary>
         /// <param name="value"></param>
-        public void AddFirst(T value)
+        public void AddToHead(T value)
         {
             var newNode = new MyNode<T>(value);
 
@@ -54,10 +54,10 @@ namespace DataStructures.LinkedList
         }
 
         /// <summary>
-        /// Add value to the end(TAIL) of link list.
+        /// Adds value to the end of link list.
         /// </summary>
         /// <param name="value"></param>
-        public void AddLast(T value)
+        public void AddToTail(T value)
         {
             var newNode = new MyNode<T>(value);
 
@@ -79,7 +79,7 @@ namespace DataStructures.LinkedList
         /// Remove the first item(HEAD) from the list.
         /// </summary>
         /// <returns></returns>
-        public bool RemoveFirst()
+        public bool RemoveFromHead()
         {
             if (_count <= 0)
             {
@@ -103,7 +103,7 @@ namespace DataStructures.LinkedList
         /// Remove the last item(TAIL) from the list.
         /// </summary>
         /// <returns></returns>
-        public bool RemoveLast()
+        public bool RemoveFromTail()
         {
             if (_count <= 0)
             {
@@ -159,7 +159,7 @@ namespace DataStructures.LinkedList
                     if (previous == null)
                     {
                         // case 2
-                        return RemoveFirst();
+                        return RemoveFromHead();
                     }
 
                     // case 3a & 3b
