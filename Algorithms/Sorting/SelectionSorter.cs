@@ -12,7 +12,7 @@ namespace Algorithms.Sorting
                 return;
             }
 
-            for (int i = 0; i < collection.Count -1; i++)
+            for (int i = 0; i < collection.Count - 1; i++)
             {
                 int minNumberIndex = i;
 
@@ -32,5 +32,30 @@ namespace Algorithms.Sorting
                 }
             }
         }
+
+        //public void Sort<T>(IList<T> collection) where T : IComparable<T>
+        //{
+        //    for (int i = 0; i < collection.Count - 1; i++)
+        //    {
+        //        bool isSmaller = false;
+        //        int minElementIndex = i;
+
+        //        for (int j = i; j < collection.Count; j++)
+        //        {
+        //            if (collection[minElementIndex].CompareTo(collection[j]) > 0)
+        //            {
+        //                isSmaller = true;
+        //                minElementIndex = j;
+        //            }
+        //        }
+
+        //        if (isSmaller)
+        //        {
+        //            var temp = collection[i];
+        //            collection[i] = collection[minElementIndex];
+        //            collection[minElementIndex] = temp;
+        //        }
+        //    }
+        //}
     }
 }
