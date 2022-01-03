@@ -14,7 +14,7 @@ namespace Algorithms
 
             // CombinatoricPlaygrounder.Play();
 
-            SortingPlaygrounder.Play();
+            // SortingPlaygrounder.Play();
         }
     }
 }
