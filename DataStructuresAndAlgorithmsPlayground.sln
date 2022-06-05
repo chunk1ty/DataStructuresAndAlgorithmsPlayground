@@ -15,7 +15,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C0C5DB26-8C7
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataStructures", "DataStructures", "{7943A1E4-DFCC-4966-8885-B80DBFC1DD52}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinaryTree", "src\DataStructures\BinaryTree\BinaryTree.csproj", "{535534F1-0EA5-443A-ABB0-C34CD517C0F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BinaryTree", "src\DataStructures\BinaryTree\BinaryTree.csproj", "{535534F1-0EA5-443A-ABB0-C34CD517C0F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinarySearchTree", "src\DataStructures\BinarySearchTree\BinarySearchTree.csproj", "{0E9E3FD3-64AB-4342-BDF1-89E56547795D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +45,10 @@ Global
 		{535534F1-0EA5-443A-ABB0-C34CD517C0F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{535534F1-0EA5-443A-ABB0-C34CD517C0F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{535534F1-0EA5-443A-ABB0-C34CD517C0F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E9E3FD3-64AB-4342-BDF1-89E56547795D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E9E3FD3-64AB-4342-BDF1-89E56547795D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E9E3FD3-64AB-4342-BDF1-89E56547795D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E9E3FD3-64AB-4342-BDF1-89E56547795D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,6 +56,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{7943A1E4-DFCC-4966-8885-B80DBFC1DD52} = {C0C5DB26-8C74-4F13-916B-D34AF75B738E}
 		{535534F1-0EA5-443A-ABB0-C34CD517C0F5} = {7943A1E4-DFCC-4966-8885-B80DBFC1DD52}
+		{0E9E3FD3-64AB-4342-BDF1-89E56547795D} = {7943A1E4-DFCC-4966-8885-B80DBFC1DD52}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2F46A118-939D-48ED-BFB5-D148BBEAD6B3}

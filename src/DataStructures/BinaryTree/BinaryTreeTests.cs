@@ -29,8 +29,10 @@ public class BinaryTreeTests
     [Test]
     public void TraverseInOrder_ShouldTraverseBinaryTree()
     {
+        // Arrange & Act
         var elements = _binaryTree.TraverseInOrder();
 
+        // Assert
         elements[0].Should().Be(3);
         elements[1].Should().Be(7);
         elements[2].Should().Be(7);
@@ -42,8 +44,10 @@ public class BinaryTreeTests
     [Test]
     public void TraversePostOrder_ShouldTraverseBinaryTree()
     {
+        // Arrange & Act
         var elements = _binaryTree.TraversePostOrder();
 
+        // Assert
         elements[0].Should().Be(3);
         elements[1].Should().Be(7);
         elements[2].Should().Be(7);
@@ -55,8 +59,10 @@ public class BinaryTreeTests
     [Test]
     public void TraversePreOrder_ShouldTraverseBinaryTree()
     {
+        // Arrange & Act
         var elements = _binaryTree.TraversePreOrder();
 
+        // Assert
         elements[0].Should().Be(12);
         elements[1].Should().Be(7);
         elements[2].Should().Be(3);

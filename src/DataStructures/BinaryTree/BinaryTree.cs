@@ -21,8 +21,7 @@ internal class BinaryTree
     }
 
     public BinaryTreeNode Root => _root;
-
-    // root > left > right
+    
     public List<int> TraversePreOrder()
     {
         var elements = new List<int>();
@@ -31,6 +30,7 @@ internal class BinaryTree
         return elements;
     }
 
+    // root > left > right
     private void PreOrder(BinaryTreeNode node, List<int> elements)
     {
         if (node is not null)
@@ -40,8 +40,7 @@ internal class BinaryTree
             PreOrder(node.Right, elements);
         }
     }
-
-    // left > root > right
+    
     public List<int> TraverseInOrder()
     {
         var elements = new List<int>();
@@ -50,6 +49,7 @@ internal class BinaryTree
         return elements;
     }
 
+    // left > root > right
     private void InOrder(BinaryTreeNode node, List<int> elements)
     {
         if (node is not null)
@@ -59,8 +59,7 @@ internal class BinaryTree
             InOrder(node.Right, elements);
         }
     }
-
-    // left > right > root
+   
     public List<int> TraversePostOrder()
     {
         var elements = new List<int>();
@@ -69,6 +68,7 @@ internal class BinaryTree
         return elements;
     }
 
+    // left > right > root
     private void PostOrder(BinaryTreeNode node, List<int> elements)
     {
         if (node is not null)
