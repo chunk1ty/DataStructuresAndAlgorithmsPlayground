@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace BinarySearchTree;
 
@@ -14,38 +13,49 @@ internal class BinarySearchTree
 
     public Node Root => _root;
 
+    /// <summary>
+    /// Adds integer value to binary search tree
+    /// </summary>
+    /// <param name="value"></param>
     public void Insert(int value)
     {
-        _root = InsertNode(_root, value);
-    }
-
-    private Node InsertNode(Node root, int value)
-    {
-        // bottom of recursion (when right place for insertion is found)
-        if (root is null)
+        if (_root == null)
         {
-            root = new Node(value);
-            return root;
-        }
-
-        // go to the left
-        if (value < root.Value)
-        {
-            root.Left = InsertNode(root.Left, value);
-        }
-        // go to the right
-        else if (value > root.Value)
-        {
-            root.Right = InsertNode(root.Right, value);
+            _root = new Node(value);
         }
         else
         {
-            // TODO: handle duplicate values
-            throw new NotSupportedException("Duplicate values are not supported");
+            InsertNode(_root, value);
         }
+    }
 
-        // return unchanged node pointer
-        return root;
+    // Recursive add algorithm
+    private void InsertNode(Node node, int value)
+    {
+        // Case 1: Go to lef (value is less than the current node value)
+        if (value < node.Value)
+        {
+            // if there is no left child make this the new leaf
+            if (node.Left is null)
+            {
+                node.Left = new Node(value);
+                return;
+            }
+
+            InsertNode(node.Left, value);
+        }
+        // Case 2: Value is equal to or greater than the current value
+        else
+        {
+            // if there is no right child make this the new leaf
+            if (node.Right is null)
+            {
+                node.Right = new Node(value);
+                return;
+            }
+
+            InsertNode(node.Right, value);
+        }
     }
 
     public List<int> TraverseInOrder()
@@ -65,30 +75,39 @@ internal class BinarySearchTree
         }
     }
 
-    public bool ContainsValue(int value)
+    /// <summary>
+    /// Determines if the specified value exists in the binary tree.
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns></returns>
+    public bool Contains(int value)
     {
-        var node = HasValue(_root, value);
+        var node = HasNode(_root, value);
 
         return node is null ? false : true;
     }
 
-    private Node HasValue(Node currentNode, int value)
+    private Node HasNode(Node currentNode, int value)
     {
+        // we don't we a match :( (bottom of recursion)
         if (currentNode is null)
         {
             return null;
         }
 
+        // we have a match! (bottom of recursion)
         if (currentNode.Value == value)
         {
             return currentNode;
         }
 
+        // if value is less than current node value go to the left
         if (value < currentNode.Value)
         {
-            return HasValue(currentNode.Left, value);
+            return HasNode(currentNode.Left, value);
         }
 
-        return HasValue(currentNode.Right, value);
+        // if value is greater or equal to current node value go to the right
+        return HasNode(currentNode.Right, value);
     }
 }

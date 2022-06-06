@@ -93,7 +93,7 @@ public class Tests
         binarySearchTree.Insert(50);
 
         // Act
-        var hasValue = binarySearchTree.ContainsValue(value);
+        var hasValue = binarySearchTree.Contains(value);
 
         hasValue.Should().BeTrue();
     }
@@ -123,8 +123,41 @@ public class Tests
         binarySearchTree.Insert(50);
 
         // Act
-        var hasValue = binarySearchTree.ContainsValue(value);
+        var hasValue = binarySearchTree.Contains(value);
 
         hasValue.Should().BeFalse();
+    }
+
+    [Test]
+    public void Delete_ShouldDeleteElementProperly()
+    {
+        // Arrange
+        var binarySearchTree = new BinarySearchTree();
+        binarySearchTree.Insert(45);
+        binarySearchTree.Insert(15);
+        binarySearchTree.Insert(79);
+        binarySearchTree.Insert(90);
+        binarySearchTree.Insert(10);
+        binarySearchTree.Insert(55);
+        binarySearchTree.Insert(12);
+        binarySearchTree.Insert(20);
+        binarySearchTree.Insert(50);
+
+        // Act
+        binarySearchTree.Delete(90);
+
+        // Assert
+        binarySearchTree.Root.Value.Should().Be(45);
+
+        binarySearchTree.Root.Left.Value.Should().Be(15);
+        binarySearchTree.Root.Right.Value.Should().Be(79);
+
+        binarySearchTree.Root.Left.Left.Value.Should().Be(10);
+        binarySearchTree.Root.Left.Right.Value.Should().Be(20);
+        binarySearchTree.Root.Right.Left.Value.Should().Be(55);
+        binarySearchTree.Root.Right.Right.Value.Should().Be(null);
+
+        binarySearchTree.Root.Left.Left.Right.Value.Should().Be(12);
+        binarySearchTree.Root.Right.Left.Left.Value.Should().Be(50);
     }
 }
