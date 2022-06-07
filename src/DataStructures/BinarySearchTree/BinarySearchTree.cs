@@ -32,7 +32,7 @@ internal class BinarySearchTree
     // Recursive add algorithm
     private void InsertNode(Node node, int value)
     {
-        // Case 1: Go to lef (value is less than the current node value)
+        // Case 1: Go to the left (value is less than the current node value)
         if (value < node.Value)
         {
             // if there is no left child make this the new leaf
@@ -44,7 +44,7 @@ internal class BinarySearchTree
 
             InsertNode(node.Left, value);
         }
-        // Case 2: Value is equal to or greater than the current value
+        // Case 2: Go to the right (value is equal to or greater than the current value)
         else
         {
             // if there is no right child make this the new leaf
@@ -82,32 +82,108 @@ internal class BinarySearchTree
     /// <returns></returns>
     public bool Contains(int value)
     {
-        var node = HasNode(_root, value);
+        var result = Find(value);
 
-        return node is null ? false : true;
+        return result.Node is null ? false : true;
     }
 
-    private Node HasNode(Node currentNode, int value)
+    private (Node Node, Node Parent) Find(int value)
     {
-        // we don't we a match :( (bottom of recursion)
-        if (currentNode is null)
+        Node current = _root;
+        Node parent = null;
+
+        while (current is not null)
         {
-            return null;
+            // we have a match! (bottom of recursion)
+            if (value == current.Value)
+            {
+                break;
+            }
+            // if value is less than current node value go to the left
+            else if (value < current.Value)
+            {
+                parent = current;
+                current = current.Left;
+            }
+            // if value is greater or equal to current node value go to the right
+            else
+            {
+                parent = current;
+                current = current.Right;
+            }
         }
 
-        // we have a match! (bottom of recursion)
-        if (currentNode.Value == value)
+        return (current, parent);
+    }
+
+    /// <summary>
+    /// Deletes the first occurance of the specified value from the tree.
+    /// </summary>
+    /// <param name="value"></param>
+    public void Delete(int value)
+    {
+        var result = Find(value);
+        var nodeToBeDeleted = result.Node;
+        var nodeToBeDeletedParent = result.Parent;
+
+        // nothing to be deleted
+        if (nodeToBeDeleted is null)
         {
-            return currentNode;
+            return;
         }
 
-        // if value is less than current node value go to the left
-        if (value < currentNode.Value)
+        // Case 1: node to be deleted is the leaf node.
+        if (nodeToBeDeleted.Left is null && nodeToBeDeleted.Right is null)
         {
-            return HasNode(currentNode.Left, value);
+            // edge case: we have a tree with single row
+            if (nodeToBeDeleted == _root)
+            {
+                _root = null;
+                return;
+            }
+
+            // nodeToBeDeleted is on the left from his parent
+            if (nodeToBeDeleted == nodeToBeDeletedParent.Left)
+            {
+                nodeToBeDeletedParent.Left = null;
+                return;
+            }
+
+            // nodeToBeDeleted is on the right from his parent
+            if (nodeToBeDeleted == nodeToBeDeletedParent.Right)
+            {
+                nodeToBeDeletedParent.Right = null;
+                return;
+            }
         }
 
-        // if value is greater or equal to current node value go to the right
-        return HasNode(currentNode.Right, value);
+        // Case 2: node to be deleted has a single child node
+        if (nodeToBeDeleted.Left is not null || nodeToBeDeleted.Right is not null)
+        {
+            Node nodeToBeDeletedChild = nodeToBeDeleted.Left is null ? nodeToBeDeleted.Right : nodeToBeDeleted.Left;
+
+            // edge case: we have a tree with only 1 root child
+            if (nodeToBeDeleted == _root)
+            {
+                _root = nodeToBeDeletedChild;
+                return;
+            }
+
+            // nodeToBeDeleted is on the left from his parent
+            if (nodeToBeDeleted == nodeToBeDeletedParent.Left)
+            {
+                nodeToBeDeletedParent.Left = nodeToBeDeletedChild;
+                return;
+            }
+
+            // nodeToBeDeleted is on the right from his parent
+            if (nodeToBeDeleted == nodeToBeDeletedParent.Right)
+            {
+                nodeToBeDeletedParent.Right = nodeToBeDeletedChild;
+                return;
+            }
+        }
+
+        // Case 3: node to be deleted has two children nodes
     }
 }
