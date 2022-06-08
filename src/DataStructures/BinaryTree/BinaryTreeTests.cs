@@ -6,8 +6,7 @@ namespace BinaryTree;
 [TestFixture]
 public class BinaryTreeTests
 {
-
-    private BinaryTree _binaryTree;
+    private MyBinaryTree _myBinaryTree;
 
     [SetUp]
     public void SetUp()
@@ -17,20 +16,20 @@ public class BinaryTreeTests
         //   7    14
         //  / \    \
         // 3   7    18
-        _binaryTree = new BinaryTree(12);
+        _myBinaryTree = new MyBinaryTree(12);
 
-        _binaryTree.Root.Left = new BinaryTreeNode(7);
-        _binaryTree.Root.Right = new BinaryTreeNode(14);
-        _binaryTree.Root.Left.Left = new BinaryTreeNode(3);
-        _binaryTree.Root.Left.Right = new BinaryTreeNode(7);
-        _binaryTree.Root.Right.Right = new BinaryTreeNode(18);
+        _myBinaryTree.Root.Left = new MyBinaryTreeNode(7);
+        _myBinaryTree.Root.Right = new MyBinaryTreeNode(14);
+        _myBinaryTree.Root.Left.Left = new MyBinaryTreeNode(3);
+        _myBinaryTree.Root.Left.Right = new MyBinaryTreeNode(7);
+        _myBinaryTree.Root.Right.Right = new MyBinaryTreeNode(18);
     }
 
     [Test]
     public void TraverseInOrder_ShouldTraverseBinaryTree()
     {
         // Arrange & Act
-        var elements = _binaryTree.TraverseInOrder();
+        var elements = _myBinaryTree.TraverseInOrder();
 
         // Assert
         elements[0].Should().Be(3);
@@ -45,7 +44,7 @@ public class BinaryTreeTests
     public void TraversePostOrder_ShouldTraverseBinaryTree()
     {
         // Arrange & Act
-        var elements = _binaryTree.TraversePostOrder();
+        var elements = _myBinaryTree.TraversePostOrder();
 
         // Assert
         elements[0].Should().Be(3);
@@ -60,7 +59,7 @@ public class BinaryTreeTests
     public void TraversePreOrder_ShouldTraverseBinaryTree()
     {
         // Arrange & Act
-        var elements = _binaryTree.TraversePreOrder();
+        var elements = _myBinaryTree.TraversePreOrder();
 
         // Assert
         elements[0].Should().Be(12);

@@ -2,16 +2,16 @@
 
 namespace BinarySearchTree;
 
-internal class BinarySearchTree
+internal class MyBinarySearchTree
 {
-    private Node _root;
+    private MyBinarySearchTreeNode _root;
 
-    public BinarySearchTree()
+    public MyBinarySearchTree()
     {
         _root = null;
     }
 
-    public Node Root => _root;
+    public MyBinarySearchTreeNode Root => _root;
 
     /// <summary>
     /// Adds integer value to binary search tree
@@ -21,7 +21,7 @@ internal class BinarySearchTree
     {
         if (_root == null)
         {
-            _root = new Node(value);
+            _root = new MyBinarySearchTreeNode(value);
         }
         else
         {
@@ -30,31 +30,31 @@ internal class BinarySearchTree
     }
 
     // Recursive add algorithm
-    private void InsertNode(Node node, int value)
+    private void InsertNode(MyBinarySearchTreeNode myBinarySearchTreeNode, int value)
     {
         // Case 1: Go to the left (value is less than the current node value)
-        if (value < node.Value)
+        if (value < myBinarySearchTreeNode.Value)
         {
             // if there is no left child make this the new leaf
-            if (node.Left is null)
+            if (myBinarySearchTreeNode.Left is null)
             {
-                node.Left = new Node(value);
+                myBinarySearchTreeNode.Left = new MyBinarySearchTreeNode(value);
                 return;
             }
 
-            InsertNode(node.Left, value);
+            InsertNode(myBinarySearchTreeNode.Left, value);
         }
         // Case 2: Go to the right (value is equal to or greater than the current value)
         else
         {
             // if there is no right child make this the new leaf
-            if (node.Right is null)
+            if (myBinarySearchTreeNode.Right is null)
             {
-                node.Right = new Node(value);
+                myBinarySearchTreeNode.Right = new MyBinarySearchTreeNode(value);
                 return;
             }
 
-            InsertNode(node.Right, value);
+            InsertNode(myBinarySearchTreeNode.Right, value);
         }
     }
 
@@ -69,13 +69,13 @@ internal class BinarySearchTree
         return items;
     }
 
-    private void InOrder(Node currentNode, List<int> items)
+    private void InOrder(MyBinarySearchTreeNode currentMyBinarySearchTreeNode, List<int> items)
     {
-        if (currentNode is not null)
+        if (currentMyBinarySearchTreeNode is not null)
         {
-            InOrder(currentNode.Left, items);
-            items.Add(currentNode.Value);
-            InOrder(currentNode.Right, items);
+            InOrder(currentMyBinarySearchTreeNode.Left, items);
+            items.Add(currentMyBinarySearchTreeNode.Value);
+            InOrder(currentMyBinarySearchTreeNode.Right, items);
         }
     }
 
@@ -91,10 +91,10 @@ internal class BinarySearchTree
         return result.Node is null ? false : true;
     }
 
-    private (Node Node, Node Parent) Find(int value)
+    private (MyBinarySearchTreeNode Node, MyBinarySearchTreeNode Parent) Find(int value)
     {
-        Node current = _root;
-        Node parent = null;
+        MyBinarySearchTreeNode current = _root;
+        MyBinarySearchTreeNode parent = null;
 
         while (current is not null)
         {
@@ -164,10 +164,10 @@ internal class BinarySearchTree
         else if (nodeToBeDeleted.Left is not null && nodeToBeDeleted.Right is not null)
         {
             // find node with lowest value (we have to keep tree consistent)
-            Node successorNode = FindMinValue(nodeToBeDeleted.Right);
+            MyBinarySearchTreeNode successorMyBinarySearchTreeNode = FindMinValue(nodeToBeDeleted.Right);
 
             // delete successor
-            int successorNodeValue = successorNode.Value;
+            int successorNodeValue = successorMyBinarySearchTreeNode.Value;
             Delete(successorNodeValue);
 
             // we only have to change node value (tree structure remain the same)
@@ -176,38 +176,38 @@ internal class BinarySearchTree
         // Case 2: node to be deleted has a single child node
         else
         {
-            Node nodeToBeDeletedChild = nodeToBeDeleted.Left is null ? nodeToBeDeleted.Right : nodeToBeDeleted.Left;
+            MyBinarySearchTreeNode myBinarySearchTreeNodeToBeDeletedChild = nodeToBeDeleted.Left is null ? nodeToBeDeleted.Right : nodeToBeDeleted.Left;
 
             // edge case: we have a tree with only 1 root child
             if (nodeToBeDeleted == _root)
             {
-                _root = nodeToBeDeletedChild;
+                _root = myBinarySearchTreeNodeToBeDeletedChild;
                 return;
             }
 
             // nodeToBeDeleted is on the left from his parent
             if (nodeToBeDeleted == nodeToBeDeletedParent.Left)
             {
-                nodeToBeDeletedParent.Left = nodeToBeDeletedChild;
+                nodeToBeDeletedParent.Left = myBinarySearchTreeNodeToBeDeletedChild;
                 return;
             }
 
             // nodeToBeDeleted is on the right from his parent
             if (nodeToBeDeleted == nodeToBeDeletedParent.Right)
             {
-                nodeToBeDeletedParent.Right = nodeToBeDeletedChild;
+                nodeToBeDeletedParent.Right = myBinarySearchTreeNodeToBeDeletedChild;
                 return;
             }
         }
     }
 
-    private Node FindMinValue(Node node)
+    private MyBinarySearchTreeNode FindMinValue(MyBinarySearchTreeNode myBinarySearchTreeNode)
     {
-        while (node.Left is not null)
+        while (myBinarySearchTreeNode.Left is not null)
         {
-            node = node.Left;
+            myBinarySearchTreeNode = myBinarySearchTreeNode.Left;
         }
 
-        return node;
+        return myBinarySearchTreeNode;
     }
 }

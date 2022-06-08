@@ -11,16 +11,16 @@ namespace BinaryTree;
 //   1
 //  / \
 // 2   3
-internal class BinaryTree
+internal class MyBinaryTree
 {
-    private readonly BinaryTreeNode _root;
+    private readonly MyBinaryTreeNode _root;
 
-    public BinaryTree(int value)
+    public MyBinaryTree(int value)
     {
-        _root = new BinaryTreeNode(value);
+        _root = new MyBinaryTreeNode(value);
     }
 
-    public BinaryTreeNode Root => _root;
+    public MyBinaryTreeNode Root => _root;
     
     public List<int> TraversePreOrder()
     {
@@ -31,7 +31,7 @@ internal class BinaryTree
     }
 
     // root > left > right
-    private void PreOrder(BinaryTreeNode node, List<int> elements)
+    private void PreOrder(MyBinaryTreeNode node, List<int> elements)
     {
         if (node is not null)
         {
@@ -50,7 +50,7 @@ internal class BinaryTree
     }
 
     // left > root > right
-    private void InOrder(BinaryTreeNode node, List<int> elements)
+    private void InOrder(MyBinaryTreeNode node, List<int> elements)
     {
         if (node is not null)
         {
@@ -69,7 +69,7 @@ internal class BinaryTree
     }
 
     // left > right > root
-    private void PostOrder(BinaryTreeNode node, List<int> elements)
+    private void PostOrder(MyBinaryTreeNode node, List<int> elements)
     {
         if (node is not null)
         {

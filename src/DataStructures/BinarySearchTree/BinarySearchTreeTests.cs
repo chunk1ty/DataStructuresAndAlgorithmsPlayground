@@ -3,14 +3,13 @@ using NUnit.Framework;
 
 namespace BinarySearchTree;
 
-public class Tests
+public class MyBinarySearchTreeTests
 {
-
     [Test]
     public void Insert_ShouldAddElementToBSTProperly()
     {
         // Arrange
-        var binarySearchTree = new BinarySearchTree();
+        var binarySearchTree = new MyBinarySearchTree();
 
         // Act
         binarySearchTree.Insert(45);
@@ -42,7 +41,7 @@ public class Tests
     public void TraverseInOrder_ShouldTraverseBSTProperly()
     {
         // Arrange
-        var binarySearchTree = new BinarySearchTree();
+        var binarySearchTree = new MyBinarySearchTree();
 
         binarySearchTree.Insert(45);
         binarySearchTree.Insert(15);
@@ -80,7 +79,7 @@ public class Tests
     public void ContainsValue_ShouldContainsValue(int value)
     {
         // Arrange
-        var binarySearchTree = new BinarySearchTree();
+        var binarySearchTree = new MyBinarySearchTree();
 
         binarySearchTree.Insert(45);
         binarySearchTree.Insert(15);
@@ -110,7 +109,7 @@ public class Tests
     public void ContainsValue_ShouldNotContainsValue(int value)
     {
         // Arrange
-        var binarySearchTree = new BinarySearchTree();
+        var binarySearchTree = new MyBinarySearchTree();
 
         binarySearchTree.Insert(45);
         binarySearchTree.Insert(15);
@@ -132,7 +131,7 @@ public class Tests
     public void Delete_ShouldNotDeleteElement()
     {
         // Arrange
-        var binarySearchTree = new BinarySearchTree();
+        var binarySearchTree = new MyBinarySearchTree();
         binarySearchTree.Insert(45);
         binarySearchTree.Insert(15);
         binarySearchTree.Insert(79);
@@ -165,7 +164,7 @@ public class Tests
     public void Delete_ShouldDeleteLeafNode()
     {
         // Arrange
-        var binarySearchTree = new BinarySearchTree();
+        var binarySearchTree = new MyBinarySearchTree();
         binarySearchTree.Insert(45);
         binarySearchTree.Insert(15);
         binarySearchTree.Insert(79);
@@ -198,7 +197,7 @@ public class Tests
     public void Delete_ShouldDeleteRootNode()
     {
         // Arrange
-        var binarySearchTree = new BinarySearchTree();
+        var binarySearchTree = new MyBinarySearchTree();
         binarySearchTree.Insert(45);        
 
         // Act
@@ -212,7 +211,7 @@ public class Tests
     public void Delete_ShouldDeleteRootNodeWithSingleChild()
     {
         // Arrange
-        var binarySearchTree = new BinarySearchTree();
+        var binarySearchTree = new MyBinarySearchTree();
         binarySearchTree.Insert(45);
         binarySearchTree.Insert(15);      
         binarySearchTree.Insert(10);
@@ -234,7 +233,7 @@ public class Tests
     public void Delete_ShouldDeleteNodeWithOneChild()
     {
         // Arrange
-        var binarySearchTree = new BinarySearchTree();
+        var binarySearchTree = new MyBinarySearchTree();
         binarySearchTree.Insert(45);
         binarySearchTree.Insert(15);
         binarySearchTree.Insert(79);
@@ -266,7 +265,7 @@ public class Tests
     public void Delete_ShouldDeleteRootNodeWithTwoChildren()
     {
         // Arrange
-        var binarySearchTree = new BinarySearchTree();
+        var binarySearchTree = new MyBinarySearchTree();
         binarySearchTree.Insert(45);
         binarySearchTree.Insert(15);
         binarySearchTree.Insert(79);
