@@ -1,13 +1,12 @@
-﻿using DataStructures.DoublyLinkedList;
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using FluentAssertions;
+using NUnit.Framework;
 
-namespace DataStructures.Tests
+namespace DoublyLinkedList
 {
-    [TestClass]
+    [TestFixture]
     public class MyDoublyLinkedListTests
     {
-        [TestMethod]
+        [Test]
         public void Add_ShouldAddElements()
         {
             // Arrange
@@ -32,7 +31,7 @@ namespace DataStructures.Tests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void Clear_ShouldClearCollection()
         {
             // Arrange
@@ -53,7 +52,7 @@ namespace DataStructures.Tests
             myDoublyLinkedList.Tail.Should().BeNull();
         }
 
-        [TestMethod]
+        [Test]
         public void Contains_ShouldReturnTrue()
         {
             // Arrange
@@ -72,7 +71,7 @@ namespace DataStructures.Tests
             result.Should().Be(true);
         }
 
-        [TestMethod]
+        [Test]
         public void Remove_ShouldRemoveSuccessfullyItemInTheMiddle()
         {
             // Arrange
@@ -99,7 +98,7 @@ namespace DataStructures.Tests
             myDoublyLinkedList.Tail.Previous.Value.Should().Be(5);
         }
 
-        [TestMethod]
+        [Test]
         public void Remove_ShouldRemoveSuccessfullyFirstOccurrence()
         {
             // Arrange
@@ -127,7 +126,7 @@ namespace DataStructures.Tests
             myDoublyLinkedList.Tail.Previous.Value.Should().Be(23);
         }
 
-        [TestMethod]
+        [Test]
         public void Remove_ShouldRemoveSuccessfullyItemInTheEnd()
         {
             // Arrange
@@ -154,7 +153,7 @@ namespace DataStructures.Tests
             myDoublyLinkedList.Tail.Previous.Value.Should().Be(5);
         }
 
-        [TestMethod]
+        [Test]
         public void Remove_ShouldRemoveSuccessfullyItemInTheBeginning()
         {
             // Arrange
@@ -181,7 +180,7 @@ namespace DataStructures.Tests
             myDoublyLinkedList.Tail.Previous.Value.Should().Be(23);
         }
 
-        [TestMethod]
+        [Test]
         public void Remove_ShouldNotRemoveItem()
         {
             // Arrange

@@ -1,14 +1,13 @@
 ﻿using System;
-using DataStructures.Dictionary;
 using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
-namespace DataStructures.Tests
+namespace Dictionary
 {
-    [TestClass]
+    [TestFixture]
     public class MyDictionaryTests
     {
-        [TestMethod]
+        [Test]
         public void Index_WhenKeyAlreadyExists_ShouldThrowException()
         {
             // Arrange
@@ -23,7 +22,7 @@ namespace DataStructures.Tests
                 .WithMessage("An item with the same key has already been added '1'");
         }
 
-        [TestMethod]
+        [Test]
         public void Add_WhenKeyAlreadyExists_ShouldThrowException()
         {
             // Arrange
@@ -42,7 +41,7 @@ namespace DataStructures.Tests
             myHashTable[17].Should().Be("17");
         }
 
-        [TestMethod]
+        [Test]
         public void Add_WithValueKey_ShouldAddElement()
         {
             // Arrange
@@ -61,7 +60,7 @@ namespace DataStructures.Tests
             myHashTable[17].Should().Be("17");
         }
 
-        [TestMethod]
+        [Test]
         public void Add_WithReferenceKey_ShouldAddElement()
         {
             // Arrange
@@ -78,7 +77,7 @@ namespace DataStructures.Tests
             myHashTable["2"].Should().Be("2");
         }
 
-        [TestMethod]
+        [Test]
         public void Remove_WithReferenceKey_ShouldRemoveElement()
         {
             // Arrange
@@ -92,7 +91,7 @@ namespace DataStructures.Tests
             myHashTable.Count.Should().Be(0);
         }
 
-        [TestMethod]
+        [Test]
         public void Remove_WithReferenceKey_ShouldRemoveCorrectElement()
         {
             // Arrange
@@ -115,7 +114,7 @@ namespace DataStructures.Tests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void Clear_WithReferenceKey_ShouldClearDictionary()
         {
             // Arrange
@@ -134,7 +133,7 @@ namespace DataStructures.Tests
         }
 
 
-        [TestMethod]
+        [Test]
         public void Index_WhenKeyDoesNotExist_ShouldThrowException()
         {
             // Arrange

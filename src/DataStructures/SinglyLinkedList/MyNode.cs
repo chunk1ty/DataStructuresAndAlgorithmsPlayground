@@ -1,4 +1,4 @@
-﻿namespace DataStructures.SinglyLinkedList
+﻿namespace SinglyLinkedList
 {
     internal class MyNode<T>
     {

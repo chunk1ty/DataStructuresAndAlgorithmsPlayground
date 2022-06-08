@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-namespace DataStructures.SinglyLinkedList
+namespace SinglyLinkedList
 {
     public class MySinglyLinkedList<T> : IEnumerable<T>
     {

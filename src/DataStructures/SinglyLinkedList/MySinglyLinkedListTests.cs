@@ -1,19 +1,18 @@
-﻿using DataStructures.SinglyLinkedList;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 
-namespace DataStructures.Tests
+namespace SinglyLinkedList
 {
-    [TestClass]
+    [TestFixture]
     public class MySinglyLinkedListTests
     {
-        [TestMethod]
+        [Test]
         public void ShouldBeEmpty()
         {
             MySinglyLinkedList<int> mySinglyLinkedList = new MySinglyLinkedList<int>();
             Assert.AreEqual(0, mySinglyLinkedList.Count);
         }
 
-        [TestMethod]
+        [Test]
         public void AddHead_ShouldAddSuccessfullyItem()
         {
             MySinglyLinkedList<int> mySinglyLinkedList = new MySinglyLinkedList<int>();
@@ -30,7 +29,7 @@ namespace DataStructures.Tests
             Assert.AreEqual(5, mySinglyLinkedList.Count);
         }
 
-        [TestMethod]
+        [Test]
         public void AddTail_ShouldAddSuccessfullyItem()
         {
             MySinglyLinkedList<int> mySinglyLinkedList = new MySinglyLinkedList<int>();
@@ -47,7 +46,7 @@ namespace DataStructures.Tests
             Assert.AreEqual(5, mySinglyLinkedList.Count);
         }
 
-        [TestMethod]
+        [Test]
         public void Remove_ShouldRemoveSuccessfullyItem()
         {
             MySinglyLinkedList<int> mySinglyLinkedList = Create(1, 10);
@@ -61,7 +60,7 @@ namespace DataStructures.Tests
             Assert.AreEqual(0, mySinglyLinkedList.Count);
         }
 
-        [TestMethod]
+        [Test]
         public void Contains_ShouldReturnFalse()
         {
             MySinglyLinkedList<int> mySinglyLinkedList = Create(1, 10);
@@ -70,7 +69,7 @@ namespace DataStructures.Tests
             Assert.IsFalse(mySinglyLinkedList.Contains(11));
         }
         
-        [TestMethod]
+        [Test]
         public void Contains_ShouldReturnTrue()
         {
             MySinglyLinkedList<int> mySinglyLinkedList = Create(1, 10);
