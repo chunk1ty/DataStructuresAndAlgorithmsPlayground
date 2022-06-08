@@ -58,7 +58,11 @@ internal class BinarySearchTree
         }
     }
 
-    public List<int> TraverseInOrder()
+    /// <summary>
+    /// Traverse binary search tree in in-order traversal
+    /// </summary>
+    /// <returns></returns>
+    public List<int> InOrderTraversal()
     {
         List<int> items = new List<int>();
         InOrder(_root, items);
@@ -156,9 +160,21 @@ internal class BinarySearchTree
                 return;
             }
         }
+        // Case 3: node to be deleted has two children nodes
+        else if (nodeToBeDeleted.Left is not null && nodeToBeDeleted.Right is not null)
+        {
+            // find node with lowest value (we have to keep tree consistent)
+            Node successorNode = FindMinValue(nodeToBeDeleted.Right);
 
+            // delete successor
+            int successorNodeValue = successorNode.Value;
+            Delete(successorNodeValue);
+
+            // we only have to change node value (tree structure remain the same)
+            nodeToBeDeleted.Value = successorNodeValue;
+        }
         // Case 2: node to be deleted has a single child node
-        if (nodeToBeDeleted.Left is not null || nodeToBeDeleted.Right is not null)
+        else
         {
             Node nodeToBeDeletedChild = nodeToBeDeleted.Left is null ? nodeToBeDeleted.Right : nodeToBeDeleted.Left;
 
@@ -183,7 +199,15 @@ internal class BinarySearchTree
                 return;
             }
         }
+    }
 
-        // Case 3: node to be deleted has two children nodes
+    private Node FindMinValue(Node node)
+    {
+        while (node.Left is not null)
+        {
+            node = node.Left;
+        }
+
+        return node;
     }
 }

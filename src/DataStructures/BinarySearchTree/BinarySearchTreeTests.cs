@@ -55,7 +55,7 @@ public class Tests
         binarySearchTree.Insert(50);
 
         // Act
-        var items = binarySearchTree.TraverseInOrder();
+        var items = binarySearchTree.InOrderTraversal();
 
         items[0].Should().Be(10);
         items[1].Should().Be(12); 
@@ -260,5 +260,37 @@ public class Tests
         binarySearchTree.Root.Right.Right.Value.Should().Be(90);
 
         binarySearchTree.Root.Right.Left.Left.Value.Should().Be(50);
+    }
+
+    [Test]
+    public void Delete_ShouldDeleteRootNodeWithTwoChildren()
+    {
+        // Arrange
+        var binarySearchTree = new BinarySearchTree();
+        binarySearchTree.Insert(45);
+        binarySearchTree.Insert(15);
+        binarySearchTree.Insert(79);
+        binarySearchTree.Insert(90);
+        binarySearchTree.Insert(10);
+        binarySearchTree.Insert(55);
+        binarySearchTree.Insert(12);
+        binarySearchTree.Insert(20);
+        binarySearchTree.Insert(50);
+
+        // Act
+        binarySearchTree.Delete(45);
+
+        // Assert
+        binarySearchTree.Root.Value.Should().Be(50);
+
+        binarySearchTree.Root.Left.Value.Should().Be(15);
+        binarySearchTree.Root.Right.Value.Should().Be(79);
+
+        binarySearchTree.Root.Left.Left.Value.Should().Be(10);
+        binarySearchTree.Root.Left.Right.Value.Should().Be(20);
+        binarySearchTree.Root.Right.Left.Value.Should().Be(55);
+        binarySearchTree.Root.Right.Right.Value.Should().Be(90);
+
+        binarySearchTree.Root.Left.Left.Right.Value.Should().Be(12);
     }
 }
