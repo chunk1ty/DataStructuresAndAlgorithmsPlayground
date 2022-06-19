@@ -98,18 +98,18 @@ internal class MyBinarySearchTree
 
         while (current is not null)
         {
-            // we have a match! (bottom of recursion)
+            // we have a match!
             if (value == current.Value)
             {
                 break;
             }
-            // if value is less than current node value go to the left
+            // if value is less than current node value - go to the left
             else if (value < current.Value)
             {
                 parent = current;
                 current = current.Left;
             }
-            // if value is greater or equal to current node value go to the right
+            // if value is greater or equal to current node value - go to the right
             else
             {
                 parent = current;
@@ -176,26 +176,26 @@ internal class MyBinarySearchTree
         // Case 2: node to be deleted has a single child node
         else
         {
-            MyBinarySearchTreeNode myBinarySearchTreeNodeToBeDeletedChild = nodeToBeDeleted.Left is null ? nodeToBeDeleted.Right : nodeToBeDeleted.Left;
+            MyBinarySearchTreeNode nodeToBeDeletedChild = nodeToBeDeleted.Left is null ? nodeToBeDeleted.Right : nodeToBeDeleted.Left;
 
             // edge case: we have a tree with only 1 root child
             if (nodeToBeDeleted == _root)
             {
-                _root = myBinarySearchTreeNodeToBeDeletedChild;
+                _root = nodeToBeDeletedChild;
                 return;
             }
 
             // nodeToBeDeleted is on the left from his parent
             if (nodeToBeDeleted == nodeToBeDeletedParent.Left)
             {
-                nodeToBeDeletedParent.Left = myBinarySearchTreeNodeToBeDeletedChild;
+                nodeToBeDeletedParent.Left = nodeToBeDeletedChild;
                 return;
             }
 
             // nodeToBeDeleted is on the right from his parent
             if (nodeToBeDeleted == nodeToBeDeletedParent.Right)
             {
-                nodeToBeDeletedParent.Right = myBinarySearchTreeNodeToBeDeletedChild;
+                nodeToBeDeletedParent.Right = nodeToBeDeletedChild;
                 return;
             }
         }

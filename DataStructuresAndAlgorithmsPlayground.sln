@@ -13,19 +13,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataStructures", "DataStruc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BinaryTree", "src\DataStructures\BinaryTree\BinaryTree.csproj", "{535534F1-0EA5-443A-ABB0-C34CD517C0F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinarySearchTree", "src\DataStructures\BinarySearchTree\BinarySearchTree.csproj", "{0E9E3FD3-64AB-4342-BDF1-89E56547795D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BinarySearchTree", "src\DataStructures\BinarySearchTree\BinarySearchTree.csproj", "{0E9E3FD3-64AB-4342-BDF1-89E56547795D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dictionary", "src\DataStructures\Dictionary\Dictionary.csproj", "{9203667C-1DE2-485F-B3B1-2A40F7D6E3BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dictionary", "src\DataStructures\Dictionary\Dictionary.csproj", "{9203667C-1DE2-485F-B3B1-2A40F7D6E3BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoublyLinkedList", "src\DataStructures\DoublyLinkedList\DoublyLinkedList.csproj", "{6B913473-FF02-45BA-B2DD-1E212538365C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DoublyLinkedList", "src\DataStructures\DoublyLinkedList\DoublyLinkedList.csproj", "{6B913473-FF02-45BA-B2DD-1E212538365C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "List", "src\DataStructures\List\List.csproj", "{8C10EB2A-39C3-497C-983A-4BD07919CC8C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "List", "src\DataStructures\List\List.csproj", "{8C10EB2A-39C3-497C-983A-4BD07919CC8C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Queue", "src\DataStructures\Queue\Queue.csproj", "{8F49590D-1D41-42C2-A79A-2FCB3114A3CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Queue", "src\DataStructures\Queue\Queue.csproj", "{8F49590D-1D41-42C2-A79A-2FCB3114A3CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SinglyLinkedList", "src\DataStructures\SinglyLinkedList\SinglyLinkedList.csproj", "{CA226244-82EE-4931-900E-5ED10AB8D6DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SinglyLinkedList", "src\DataStructures\SinglyLinkedList\SinglyLinkedList.csproj", "{CA226244-82EE-4931-900E-5ED10AB8D6DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stack", "src\DataStructures\Stack\Stack.csproj", "{46BDFEF7-1E17-4123-8DD8-1B39CD252515}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Stack", "src\DataStructures\Stack\Stack.csproj", "{46BDFEF7-1E17-4123-8DD8-1B39CD252515}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvlTree", "src\DataStructures\AvlTree\AvlTree.csproj", "{E2C85E22-2296-44D9-B5B5-A5A399A327BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,6 +75,10 @@ Global
 		{46BDFEF7-1E17-4123-8DD8-1B39CD252515}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46BDFEF7-1E17-4123-8DD8-1B39CD252515}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46BDFEF7-1E17-4123-8DD8-1B39CD252515}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2C85E22-2296-44D9-B5B5-A5A399A327BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2C85E22-2296-44D9-B5B5-A5A399A327BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2C85E22-2296-44D9-B5B5-A5A399A327BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2C85E22-2296-44D9-B5B5-A5A399A327BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -87,6 +93,7 @@ Global
 		{8F49590D-1D41-42C2-A79A-2FCB3114A3CE} = {7943A1E4-DFCC-4966-8885-B80DBFC1DD52}
 		{CA226244-82EE-4931-900E-5ED10AB8D6DA} = {7943A1E4-DFCC-4966-8885-B80DBFC1DD52}
 		{46BDFEF7-1E17-4123-8DD8-1B39CD252515} = {7943A1E4-DFCC-4966-8885-B80DBFC1DD52}
+		{E2C85E22-2296-44D9-B5B5-A5A399A327BF} = {7943A1E4-DFCC-4966-8885-B80DBFC1DD52}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2F46A118-939D-48ED-BFB5-D148BBEAD6B3}
