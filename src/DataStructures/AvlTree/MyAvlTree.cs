@@ -28,45 +28,49 @@ internal class MyAvlTree
         }
     }
 
-    private MyAvlNode InsertNode(MyAvlNode node, int value)
+    private MyAvlNode InsertNode(MyAvlNode subTreeRoot, int newNodeValue)
     {
         // bottom of recursion
-        if (node is null)
+        if (subTreeRoot is null)
         {
-            return new MyAvlNode(value);
+            return new MyAvlNode(newNodeValue);
         }
 
         // Case 1: Go to the left (value is less than the current node value)
-        if (value < node.Value)
+        if (newNodeValue < subTreeRoot.Value)
         {
-            node.Left = InsertNode(node.Left, value);
+            subTreeRoot.Left = InsertNode(subTreeRoot.Left, newNodeValue);
         }
         // Case 2: Go to the right (value is equal to or greater than the current value)
         else
         {
-            node.Right = InsertNode(node.Right, value);
+            subTreeRoot.Right = InsertNode(subTreeRoot.Right, newNodeValue);
         }
 
-        node.Update();
+        subTreeRoot.Update();
 
-        if (node.BalanceFactor == 2 && node.Left.BalanceFactor == 1)
+        // right heavy 
+        if (subTreeRoot.BalanceFactor == 2 && subTreeRoot.Left.BalanceFactor == 1)
         {            
-            node = RightRotation(node);
+            subTreeRoot = RightRotation(subTreeRoot);
         }
-        else if (node.BalanceFactor == 2 && node.Left.BalanceFactor == -1)
+        // right heavy 
+        else if (subTreeRoot.BalanceFactor == 2 && subTreeRoot.Left.BalanceFactor == -1)
         {
-            node = LeftRightRotation(node);
+            subTreeRoot = RightLeftRotation(subTreeRoot);
         }
-        else if (node.BalanceFactor == -2 && node.Right.BalanceFactor == 1)
+        // left heavy
+        else if (subTreeRoot.BalanceFactor == -2 && subTreeRoot.Right.BalanceFactor == 1)
         {
-            node = RightLeftRotation(node);
+            subTreeRoot = LeftRightRotation(subTreeRoot);
         }
-        else if (node.BalanceFactor == -2 && node.Right.BalanceFactor == -1)
+        // left heavy 
+        else if (subTreeRoot.BalanceFactor == -2 && subTreeRoot.Right.BalanceFactor == -1)
         {
-            node = LeftRotation(node);
+            subTreeRoot = LeftRotation(subTreeRoot);
         }
 
-        return node;
+        return subTreeRoot;
     }
 
     //     c (this)
@@ -79,15 +83,20 @@ internal class MyAvlTree
     //       b
     //      / \
     //     a   c
-    private MyAvlNode RightRotation(MyAvlNode parent)
+    private MyAvlNode RightRotation(MyAvlNode oldSubtreeRoot)
     {
-        var pivot = parent.Left;
-        parent.Left = pivot.Right;
-        pivot.Right = parent;
+        // 1. Left child becomes the new root
+        var newSubTreeRoot = oldSubtreeRoot.Left;
 
-        parent.Update();
-        pivot.Update();
-        return pivot;
+        // 2. Right child of the new root is assigned to left child of the old root
+        oldSubtreeRoot.Left = newSubTreeRoot.Right;
+
+        // 3. Previous root becomes the new root’s right child
+        newSubTreeRoot.Right = oldSubtreeRoot;
+
+        oldSubtreeRoot.Update();
+        newSubTreeRoot.Update();
+        return newSubTreeRoot;
     }
 
     //     c (this)
@@ -100,10 +109,13 @@ internal class MyAvlTree
     //       b
     //      / \
     //     a   c
-    private MyAvlNode LeftRightRotation(MyAvlNode parent)
-    {        
-        parent.Left = LeftRotation(parent.Left);
-        return RightRotation(parent);
+    private MyAvlNode RightLeftRotation(MyAvlNode subtreeRoot)
+    {
+        // 1. Left rotate the left child 
+        subtreeRoot.Left = LeftRotation(subtreeRoot.Left);
+
+        // 2. Right rotate the root
+        return RightRotation(subtreeRoot);
     }
 
     //     a
@@ -116,15 +128,21 @@ internal class MyAvlTree
     //       b
     //      / \
     //     a   c
-    private MyAvlNode LeftRotation(MyAvlNode parent)
+    private MyAvlNode LeftRotation(MyAvlNode oldSubTreeRoot)
     {
-        var pivot = parent.Right;
-        parent.Right = pivot.Left;
-        pivot.Left = parent;
+        // 1. Right child becomes the new root
+        var newSubTreeRoot = oldSubTreeRoot.Right;
 
-        parent.Update();
-        pivot.Update();
-        return pivot;
+        // 2. Left child of the new root is assigned to right child of the old root 
+        oldSubTreeRoot.Right = newSubTreeRoot.Left;
+
+        // 3. Previous root becomes the new root’s left child
+        newSubTreeRoot.Left = oldSubTreeRoot;
+
+        oldSubTreeRoot.Update();
+        newSubTreeRoot.Update();
+
+        return newSubTreeRoot;
     }
 
     //     a
@@ -137,9 +155,12 @@ internal class MyAvlTree
     //       b
     //      / \
     //     a   c
-    private MyAvlNode RightLeftRotation(MyAvlNode parent)
+    private MyAvlNode LeftRightRotation(MyAvlNode subtreeRoot)
     {
-        parent.Right = RightRotation(parent.Right);
-        return LeftRotation(parent);
+        // 1. Right rotate the right child
+        subtreeRoot.Right = RightRotation(subtreeRoot.Right);
+
+        // 2. Left rotate the root
+        return LeftRotation(subtreeRoot);
     }
 }

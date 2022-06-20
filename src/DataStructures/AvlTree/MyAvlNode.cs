@@ -17,9 +17,9 @@ internal class MyAvlNode
 
     public int Value => _value;
 
-    public int Height { get; set; }
+    public int Height { get; private set; }
 
-    public int BalanceFactor { get; set; }
+    public int BalanceFactor { get; private set; }
 
     public MyAvlNode Right { get; set; }
 

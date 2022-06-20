@@ -51,7 +51,7 @@ public class MyAvlTreeTests
     //      /  \
     //     10   30
     [Test]
-    public void Insert_ShouldAutoRebalance_ByLeftRightRotation()
+    public void Insert_ShouldAutoRebalance_ByRightLeftRotation()
     {
         // Arrange
         var myAvlTree = new MyAvlTree();
@@ -121,7 +121,7 @@ public class MyAvlTreeTests
     //      /  \
     //     10   30
     [Test]
-    public void Insert_ShouldAutoRebalance_ByRightLeftRotation()
+    public void Insert_ShouldAutoRebalance_ByLeftRightRotation()
     {
         // Arrange
         var myAvlTree = new MyAvlTree();
