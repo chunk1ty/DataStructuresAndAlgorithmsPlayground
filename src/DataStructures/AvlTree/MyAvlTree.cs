@@ -163,4 +163,65 @@ internal class MyAvlTree
         // 2. Left rotate the root
         return LeftRotation(subtreeRoot);
     }
+
+    public void Delete(int value)
+    {
+        _root = DeleteNode(_root, value);
+    }
+
+    private MyAvlNode DeleteNode(MyAvlNode nodeToBeDeleted, int value)
+    {
+        // go to the left
+        if (value < nodeToBeDeleted.Value)
+        {
+            nodeToBeDeleted.Left = DeleteNode(nodeToBeDeleted.Left, value);
+        }
+        // go to the right
+        else if(value > nodeToBeDeleted.Value)
+        {
+            nodeToBeDeleted.Right = DeleteNode(nodeToBeDeleted.Right, value);
+        }
+        // we have a match!
+        else
+        {
+            // node is leaf
+            if (nodeToBeDeleted.Left is null && nodeToBeDeleted.Right is null)
+            {
+                nodeToBeDeleted = null;
+            }
+            // node has 1 child - on the left
+            else if(nodeToBeDeleted.Left is not null && nodeToBeDeleted.Right is null)
+            {
+                nodeToBeDeleted = nodeToBeDeleted.Left;
+            }
+            // node has 1 child - on the right
+            else if (nodeToBeDeleted.Left is null && nodeToBeDeleted.Right is not null)
+            {
+                nodeToBeDeleted = nodeToBeDeleted.Right;
+            }
+            // node has 2 child
+            else
+            {
+                // find new sub tree root
+                var nodeWithLowestValue = FindNodeWithMinValue(nodeToBeDeleted.Right);
+                     
+                // replace node to be deleted value with lowest value from the right sub tree (in order to keep tree consistent)
+                nodeToBeDeleted.Value = nodeWithLowestValue.Value;
+
+                nodeToBeDeleted.Right = DeleteNode(nodeToBeDeleted.Right, nodeWithLowestValue.Value);
+            }
+        }
+
+        return nodeToBeDeleted;
+    }
+
+    private MyAvlNode FindNodeWithMinValue(MyAvlNode node)
+    {
+        while(node.Left is not null)
+        {
+            node = node.Left;
+        }
+
+        return node;
+    }
 }

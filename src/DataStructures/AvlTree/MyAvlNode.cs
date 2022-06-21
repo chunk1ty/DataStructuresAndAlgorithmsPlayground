@@ -4,18 +4,16 @@ namespace AvlTree;
 
 internal class MyAvlNode
 {
-    private int _value;
-
     public MyAvlNode(int value)
     {
-        _value = value;
+        Value = value;
         Height = 1;
         BalanceFactor = 0;
         Left = null;
         Right = null;
     }
 
-    public int Value => _value;
+    public int Value { get; set; }
 
     public int Height { get; private set; }
 

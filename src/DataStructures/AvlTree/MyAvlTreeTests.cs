@@ -164,4 +164,87 @@ public class MyAvlTreeTests
         // Assert
        
     }
+
+    [Test]
+    public void Delete_WithSingleElement_ShouldDeleteRoot()
+    {
+        // Arrange
+        var myAvlTree = new MyAvlTree();
+        myAvlTree.Insert(42);
+
+        // Act
+        myAvlTree.Delete(42);
+
+        // Assert
+        myAvlTree.Root.Should().BeNull();
+    }
+
+    [Test]
+    public void Delete_WithTwoElements_ShouldDeleteLeaf()
+    {
+        // Arrange
+        var myAvlTree = new MyAvlTree();
+        myAvlTree.Insert(42);
+        myAvlTree.Insert(17);
+
+        // Act
+        myAvlTree.Delete(17);
+
+        // Assert
+        myAvlTree.Root.Value.Should().Be(42);
+        myAvlTree.Root.Left.Should().BeNull();
+        myAvlTree.Root.Right.Should().BeNull();
+    }
+
+    [Test]
+    public void Delete_WithTwoElements_ShouldDeleteNodeWithSingleLeftChild()
+    {
+        // Arrange
+        var myAvlTree = new MyAvlTree();
+        myAvlTree.Insert(42);
+        myAvlTree.Insert(17);
+
+        // Act
+        myAvlTree.Delete(42);
+
+        // Assert
+        myAvlTree.Root.Value.Should().Be(17);
+        myAvlTree.Root.Left.Should().BeNull();
+        myAvlTree.Root.Right.Should().BeNull();
+    }
+
+    [Test]
+    public void Delete_WithTwoElements_ShouldDeleteNodeWithSingleRightChild()
+    {
+        // Arrange
+        var myAvlTree = new MyAvlTree();
+        myAvlTree.Insert(42);
+        myAvlTree.Insert(52);
+
+        // Act
+        myAvlTree.Delete(42);
+
+        // Assert
+        myAvlTree.Root.Value.Should().Be(52);
+        myAvlTree.Root.Left.Should().BeNull();
+        myAvlTree.Root.Right.Should().BeNull();
+    }
+
+    [Test]
+    public void Delete_WithTwoElements_ShouldDeleteNodeTwoChild()
+    {
+        // Arrange
+        var myAvlTree = new MyAvlTree();
+        myAvlTree.Insert(42);
+        myAvlTree.Insert(17);
+        myAvlTree.Insert(52);
+
+        // Act
+        myAvlTree.Delete(42);
+
+        // Assert
+        myAvlTree.Root.Value.Should().Be(52);
+        myAvlTree.Root.Left.Value.Should().Be(17);
+        myAvlTree.Root.Right.Should().BeNull();
+    }
 }
