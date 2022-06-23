@@ -1,4 +1,6 @@
-﻿namespace AvlTree;
+﻿using System;
+
+namespace AvlTree;
 
 internal class MyAvlTree
 {
@@ -49,25 +51,42 @@ internal class MyAvlTree
 
         subTreeRoot.Update();
 
-        // right heavy 
-        if (subTreeRoot.BalanceFactor == 2 && subTreeRoot.Left.BalanceFactor == 1)
-        {            
-            subTreeRoot = LeftRotation(subTreeRoot);
-        }
-        // right heavy 
-        else if (subTreeRoot.BalanceFactor == 2 && subTreeRoot.Left.BalanceFactor == -1)
-        {
-            subTreeRoot = LeftRightRotation(subTreeRoot);
-        }
-        // left heavy
-        else if (subTreeRoot.BalanceFactor == -2 && subTreeRoot.Right.BalanceFactor == 1)
-        {
-            subTreeRoot = RightLeftRotation(subTreeRoot);
-        }
+        return Rebalance(subTreeRoot);
+    }
+
+    private MyAvlNode Rebalance(MyAvlNode subTreeRoot)
+    {
         // left heavy 
-        else if (subTreeRoot.BalanceFactor == -2 && subTreeRoot.Right.BalanceFactor == -1)
+        if (subTreeRoot.BalanceFactor == -2)
         {
-            subTreeRoot = RightRotation(subTreeRoot);
+            if (subTreeRoot.Right.BalanceFactor == -1 || subTreeRoot.Right.BalanceFactor == 0)
+            {
+                return RightRotation(subTreeRoot);
+            }
+            else if(subTreeRoot.Right.BalanceFactor == 1)
+            {
+                return RightLeftRotation(subTreeRoot);
+            }
+            else
+            {
+                throw new ArgumentException($"Incorrect balance factor: [{subTreeRoot.BalanceFactor}]");
+            }
+        }    
+        // right heavy
+        else if (subTreeRoot.BalanceFactor == 2)
+        {
+            if (subTreeRoot.Left.BalanceFactor == -1)
+            {
+                return LeftRightRotation(subTreeRoot);
+            }
+            else if(subTreeRoot.Left.BalanceFactor == 0 || subTreeRoot.Left.BalanceFactor == 1)
+            {
+                return LeftRotation(subTreeRoot);
+            }
+            else
+            {
+                throw new ArgumentException($"Incorrect balance factor: [{subTreeRoot.BalanceFactor}]");
+            }
         }
 
         return subTreeRoot;
@@ -177,7 +196,7 @@ internal class MyAvlTree
             subTreeRoot.Left = DeleteNode(subTreeRoot.Left, valueToBeDeleted);
         }
         // go to the right
-        else if(valueToBeDeleted > subTreeRoot.Value)
+        else if (valueToBeDeleted > subTreeRoot.Value)
         {
             subTreeRoot.Right = DeleteNode(subTreeRoot.Right, valueToBeDeleted);
         }
@@ -190,7 +209,7 @@ internal class MyAvlTree
                 subTreeRoot = null;
             }
             // Case 2: Node has 1 child - on the left
-            else if(subTreeRoot.Left is not null && subTreeRoot.Right is null)
+            else if (subTreeRoot.Left is not null && subTreeRoot.Right is null)
             {
                 subTreeRoot = subTreeRoot.Left;
             }
@@ -204,7 +223,7 @@ internal class MyAvlTree
             {
                 // find new sub tree root
                 var nodeWithLowestValue = FindNodeWithMinValue(subTreeRoot.Right);
-                     
+
                 // replace node to be deleted value with lowest value from the right sub tree (in order to keep tree consistent)
                 subTreeRoot.Value = nodeWithLowestValue.Value;
 
@@ -219,30 +238,7 @@ internal class MyAvlTree
 
         subTreeRoot.Update();
 
-        // right heavy 
-        if (subTreeRoot.BalanceFactor == 2 && (subTreeRoot.Left.BalanceFactor == 1 ||                   
-                                                   subTreeRoot.Left.BalanceFactor == 0))
-        {
-            subTreeRoot = LeftRotation(subTreeRoot);
-        }
-        // right heavy 
-        else if (subTreeRoot.BalanceFactor == 2 && subTreeRoot.Left.BalanceFactor == -1)
-        {
-            subTreeRoot = LeftRightRotation(subTreeRoot);
-        }
-        // left heavy
-        else if (subTreeRoot.BalanceFactor == -2 && subTreeRoot.Right.BalanceFactor == 1)
-        {
-            subTreeRoot = RightLeftRotation(subTreeRoot);
-        }
-        // left heavy 
-        else if (subTreeRoot.BalanceFactor == -2 && (subTreeRoot.Right.BalanceFactor == -1 ||
-                                                         subTreeRoot.Right.BalanceFactor == 0))
-        {
-            subTreeRoot = RightRotation(subTreeRoot);
-        }
-
-        return subTreeRoot;
+        return Rebalance(subTreeRoot);
     }
 
     private MyAvlNode FindNodeWithMinValue(MyAvlNode node)
