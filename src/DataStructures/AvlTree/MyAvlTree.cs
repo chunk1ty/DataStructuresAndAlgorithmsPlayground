@@ -52,22 +52,22 @@ internal class MyAvlTree
         // right heavy 
         if (subTreeRoot.BalanceFactor == 2 && subTreeRoot.Left.BalanceFactor == 1)
         {            
-            subTreeRoot = RightRotation(subTreeRoot);
+            subTreeRoot = LeftRotation(subTreeRoot);
         }
         // right heavy 
         else if (subTreeRoot.BalanceFactor == 2 && subTreeRoot.Left.BalanceFactor == -1)
         {
-            subTreeRoot = RightLeftRotation(subTreeRoot);
+            subTreeRoot = LeftRightRotation(subTreeRoot);
         }
         // left heavy
         else if (subTreeRoot.BalanceFactor == -2 && subTreeRoot.Right.BalanceFactor == 1)
         {
-            subTreeRoot = LeftRightRotation(subTreeRoot);
+            subTreeRoot = RightLeftRotation(subTreeRoot);
         }
         // left heavy 
         else if (subTreeRoot.BalanceFactor == -2 && subTreeRoot.Right.BalanceFactor == -1)
         {
-            subTreeRoot = LeftRotation(subTreeRoot);
+            subTreeRoot = RightRotation(subTreeRoot);
         }
 
         return subTreeRoot;
@@ -83,7 +83,7 @@ internal class MyAvlTree
     //       b
     //      / \
     //     a   c
-    private MyAvlNode RightRotation(MyAvlNode oldSubtreeRoot)
+    private MyAvlNode LeftRotation(MyAvlNode oldSubtreeRoot)
     {
         // 1. Left child becomes the new root
         var newSubTreeRoot = oldSubtreeRoot.Left;
@@ -109,13 +109,13 @@ internal class MyAvlTree
     //       b
     //      / \
     //     a   c
-    private MyAvlNode RightLeftRotation(MyAvlNode subtreeRoot)
+    private MyAvlNode LeftRightRotation(MyAvlNode subtreeRoot)
     {
         // 1. Left rotate the left child 
-        subtreeRoot.Left = LeftRotation(subtreeRoot.Left);
+        subtreeRoot.Left = RightRotation(subtreeRoot.Left);
 
         // 2. Right rotate the root
-        return RightRotation(subtreeRoot);
+        return LeftRotation(subtreeRoot);
     }
 
     //     a
@@ -128,7 +128,7 @@ internal class MyAvlTree
     //       b
     //      / \
     //     a   c
-    private MyAvlNode LeftRotation(MyAvlNode oldSubTreeRoot)
+    private MyAvlNode RightRotation(MyAvlNode oldSubTreeRoot)
     {
         // 1. Right child becomes the new root
         var newSubTreeRoot = oldSubTreeRoot.Right;
@@ -155,13 +155,13 @@ internal class MyAvlTree
     //       b
     //      / \
     //     a   c
-    private MyAvlNode LeftRightRotation(MyAvlNode subtreeRoot)
+    private MyAvlNode RightLeftRotation(MyAvlNode subtreeRoot)
     {
         // 1. Right rotate the right child
-        subtreeRoot.Right = RightRotation(subtreeRoot.Right);
+        subtreeRoot.Right = LeftRotation(subtreeRoot.Right);
 
         // 2. Left rotate the root
-        return LeftRotation(subtreeRoot);
+        return RightRotation(subtreeRoot);
     }
 
     public void Delete(int value)
@@ -169,50 +169,80 @@ internal class MyAvlTree
         _root = DeleteNode(_root, value);
     }
 
-    private MyAvlNode DeleteNode(MyAvlNode nodeToBeDeleted, int value)
+    private MyAvlNode DeleteNode(MyAvlNode subTreeRoot, int valueToBeDeleted)
     {
         // go to the left
-        if (value < nodeToBeDeleted.Value)
+        if (valueToBeDeleted < subTreeRoot.Value)
         {
-            nodeToBeDeleted.Left = DeleteNode(nodeToBeDeleted.Left, value);
+            subTreeRoot.Left = DeleteNode(subTreeRoot.Left, valueToBeDeleted);
         }
         // go to the right
-        else if(value > nodeToBeDeleted.Value)
+        else if(valueToBeDeleted > subTreeRoot.Value)
         {
-            nodeToBeDeleted.Right = DeleteNode(nodeToBeDeleted.Right, value);
+            subTreeRoot.Right = DeleteNode(subTreeRoot.Right, valueToBeDeleted);
         }
-        // we have a match!
+        // we have a match! valueToBeDeleted = subTreeRoot.Value
         else
         {
-            // node is leaf
-            if (nodeToBeDeleted.Left is null && nodeToBeDeleted.Right is null)
+            // Case 1: Node is leaf
+            if (subTreeRoot.Left is null && subTreeRoot.Right is null)
             {
-                nodeToBeDeleted = null;
+                subTreeRoot = null;
             }
-            // node has 1 child - on the left
-            else if(nodeToBeDeleted.Left is not null && nodeToBeDeleted.Right is null)
+            // Case 2: Node has 1 child - on the left
+            else if(subTreeRoot.Left is not null && subTreeRoot.Right is null)
             {
-                nodeToBeDeleted = nodeToBeDeleted.Left;
+                subTreeRoot = subTreeRoot.Left;
             }
-            // node has 1 child - on the right
-            else if (nodeToBeDeleted.Left is null && nodeToBeDeleted.Right is not null)
+            // Case 2: Node has 1 child - on the right
+            else if (subTreeRoot.Left is null && subTreeRoot.Right is not null)
             {
-                nodeToBeDeleted = nodeToBeDeleted.Right;
+                subTreeRoot = subTreeRoot.Right;
             }
-            // node has 2 child
+            // Case 3: Node has 2 child
             else
             {
                 // find new sub tree root
-                var nodeWithLowestValue = FindNodeWithMinValue(nodeToBeDeleted.Right);
+                var nodeWithLowestValue = FindNodeWithMinValue(subTreeRoot.Right);
                      
                 // replace node to be deleted value with lowest value from the right sub tree (in order to keep tree consistent)
-                nodeToBeDeleted.Value = nodeWithLowestValue.Value;
+                subTreeRoot.Value = nodeWithLowestValue.Value;
 
-                nodeToBeDeleted.Right = DeleteNode(nodeToBeDeleted.Right, nodeWithLowestValue.Value);
+                subTreeRoot.Right = DeleteNode(subTreeRoot.Right, nodeWithLowestValue.Value);
             }
         }
 
-        return nodeToBeDeleted;
+        if (subTreeRoot is null)
+        {
+            return null;
+        }
+
+        subTreeRoot.Update();
+
+        // right heavy 
+        if (subTreeRoot.BalanceFactor == 2 && (subTreeRoot.Left.BalanceFactor == 1 ||                   
+                                                   subTreeRoot.Left.BalanceFactor == 0))
+        {
+            subTreeRoot = LeftRotation(subTreeRoot);
+        }
+        // right heavy 
+        else if (subTreeRoot.BalanceFactor == 2 && subTreeRoot.Left.BalanceFactor == -1)
+        {
+            subTreeRoot = LeftRightRotation(subTreeRoot);
+        }
+        // left heavy
+        else if (subTreeRoot.BalanceFactor == -2 && subTreeRoot.Right.BalanceFactor == 1)
+        {
+            subTreeRoot = RightLeftRotation(subTreeRoot);
+        }
+        // left heavy 
+        else if (subTreeRoot.BalanceFactor == -2 && (subTreeRoot.Right.BalanceFactor == -1 ||
+                                                         subTreeRoot.Right.BalanceFactor == 0))
+        {
+            subTreeRoot = RightRotation(subTreeRoot);
+        }
+
+        return subTreeRoot;
     }
 
     private MyAvlNode FindNodeWithMinValue(MyAvlNode node)
