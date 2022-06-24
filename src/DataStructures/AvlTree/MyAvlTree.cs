@@ -192,6 +192,12 @@ internal class MyAvlTree : IEnumerable
 
     private MyAvlNode DeleteNode(MyAvlNode subTreeRoot, int valueToBeDeleted)
     {
+        // nothing to be deleted
+        if (subTreeRoot is null)
+        {
+            return null;
+        }
+
         // go to the left
         if (valueToBeDeleted < subTreeRoot.Value)
         {
@@ -233,6 +239,7 @@ internal class MyAvlTree : IEnumerable
             }
         }
 
+        // Find the node to be deleted and remove it
         if (subTreeRoot is null)
         {
             return null;
