@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Stack;
+using System;
+using System.Collections;
 
 namespace AvlTree;
 
-internal class MyAvlTree
+internal class MyAvlTree : IEnumerable
 {
     private MyAvlNode _root;
 
@@ -63,7 +65,7 @@ internal class MyAvlTree
             {
                 return RightRotation(subTreeRoot);
             }
-            else if(subTreeRoot.Right.BalanceFactor == 1)
+            else if (subTreeRoot.Right.BalanceFactor == 1)
             {
                 return RightLeftRotation(subTreeRoot);
             }
@@ -71,7 +73,7 @@ internal class MyAvlTree
             {
                 throw new ArgumentException($"Incorrect balance factor: [{subTreeRoot.BalanceFactor}]");
             }
-        }    
+        }
         // right heavy
         else if (subTreeRoot.BalanceFactor == 2)
         {
@@ -79,7 +81,7 @@ internal class MyAvlTree
             {
                 return LeftRightRotation(subTreeRoot);
             }
-            else if(subTreeRoot.Left.BalanceFactor == 0 || subTreeRoot.Left.BalanceFactor == 1)
+            else if (subTreeRoot.Left.BalanceFactor == 0 || subTreeRoot.Left.BalanceFactor == 1)
             {
                 return LeftRotation(subTreeRoot);
             }
@@ -243,11 +245,85 @@ internal class MyAvlTree
 
     private MyAvlNode FindNodeWithMinValue(MyAvlNode node)
     {
-        while(node.Left is not null)
+        while (node.Left is not null)
         {
             node = node.Left;
         }
 
         return node;
+    }
+
+    public bool Contains(int value)
+    {
+        return Find(Root, value) != null;
+    }
+
+    private MyAvlNode Find(MyAvlNode subTreeRoot, int value)
+    {
+        if (subTreeRoot is null)
+        {
+            return null;
+        }
+
+        if (value == subTreeRoot.Value)
+        {
+            return subTreeRoot;
+        }
+
+        if (value < subTreeRoot.Value)
+        {
+            return Find(subTreeRoot.Left, value);
+        }
+
+        return Find(subTreeRoot.Right, value);
+    }
+
+    public IEnumerator GetEnumerator()
+    {
+        // store the nodes we've skipped in this stack
+        MyStack<MyAvlNode> stack = new MyStack<MyAvlNode>();
+
+        MyAvlNode current = Root;
+
+        // we need to keep track of whether or not
+        // we should be going to the left node or the right nodes next.
+        bool goLeftNext = true;
+
+        // start by pushing Root onto the stack
+        stack.Push(current);
+
+        while (stack.Count > 0)
+        {
+            if (goLeftNext)
+            {
+                // push everything but the left-most node to the stack
+                // we'll yield the left-most after this block
+                while (current.Left != null)
+                {
+                    stack.Push(current);
+                    current = current.Left;
+                }
+            }
+
+            // in-order is left->yield->right
+            yield return current.Value;
+
+            // if we can go right then do so
+            if (current.Right != null)
+            {
+                current = current.Right;
+
+                // once we've gone right once, we need to start
+                // going left again.
+                goLeftNext = true;
+            }
+            else
+            {
+                // if we can't go right then we need to pop off the parent node
+                // so we can process it and then go to it's right node
+                current = stack.Pop();
+                goLeftNext = false;
+            }
+        }
     }
 }
