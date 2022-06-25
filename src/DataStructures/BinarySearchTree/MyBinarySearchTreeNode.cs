@@ -14,4 +14,9 @@ internal class MyBinarySearchTreeNode
     public MyBinarySearchTreeNode Right { get; set; }
 
     public int Value { get; set; }
+
+    public override string ToString()
+    {
+        return $"{Value}";
+    }
 }

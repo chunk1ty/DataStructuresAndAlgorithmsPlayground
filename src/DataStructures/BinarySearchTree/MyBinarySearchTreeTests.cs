@@ -67,6 +67,32 @@ public class MyBinarySearchTreeTests
         items[8].Should().Be(90); 
     }
 
+    [Test]
+    public void Enumerable_ShouldEnumerateTree()
+    {
+        // Arrange
+        var binarySearchTree = new MyBinarySearchTree();
+
+        binarySearchTree.Insert(45);
+        binarySearchTree.Insert(15);
+        binarySearchTree.Insert(79);
+        binarySearchTree.Insert(90);
+        binarySearchTree.Insert(10);
+        binarySearchTree.Insert(55);
+        binarySearchTree.Insert(12);
+        binarySearchTree.Insert(20);
+        binarySearchTree.Insert(50);
+
+        // Act & Assert
+        var expected = new[] { 10, 12, 15, 20, 45, 50, 55, 79, 90 };
+        int index = 0;
+        foreach (var nodeValue in binarySearchTree)
+        {
+            nodeValue.Should().Be(expected[index]);
+            index++;
+        }
+    }
+
     [TestCase(45)]
     [TestCase(15)]
     [TestCase(79)]

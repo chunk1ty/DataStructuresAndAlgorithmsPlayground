@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using Stack;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace BinarySearchTree;
 
-internal class MyBinarySearchTree
+internal class MyBinarySearchTree : IEnumerable
 {
     private MyBinarySearchTreeNode _root;
 
@@ -209,5 +211,39 @@ internal class MyBinarySearchTree
         }
 
         return myBinarySearchTreeNode;
+    }
+
+    public IEnumerator GetEnumerator()
+    {
+        MyStack<MyBinarySearchTreeNode> elements = new MyStack<MyBinarySearchTreeNode>();
+
+        MyBinarySearchTreeNode current = _root;
+        elements.Push(current);
+
+        bool goToTheLeft = true;
+        while (elements.Count > 0)
+        {
+            if (goToTheLeft)
+            {
+                while (current.Left is not null)
+                {
+                    elements.Push(current);
+                    current = current.Left;
+                }
+            }            
+
+            yield return current.Value;
+
+            if (current.Right is not null)
+            {
+                current = current.Right;
+                goToTheLeft = true;
+            }
+            else
+            {
+                current = elements.Pop();
+                goToTheLeft = false;
+            }
+        }
     }
 }
