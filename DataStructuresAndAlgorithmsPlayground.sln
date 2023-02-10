@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Combinatorics", "src\Algori
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sorting", "src\Algorithms\Sorting\Sorting.csproj", "{6C11ABE1-984B-451C-ABD8-C40F88C8BB96}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinarySearch", "src\Algorithms\BinarySearch\BinarySearch.csproj", "{4D87B443-E493-4CEB-91E6-966E6F59F194}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +83,10 @@ Global
 		{6C11ABE1-984B-451C-ABD8-C40F88C8BB96}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C11ABE1-984B-451C-ABD8-C40F88C8BB96}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C11ABE1-984B-451C-ABD8-C40F88C8BB96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D87B443-E493-4CEB-91E6-966E6F59F194}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D87B443-E493-4CEB-91E6-966E6F59F194}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D87B443-E493-4CEB-91E6-966E6F59F194}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D87B443-E493-4CEB-91E6-966E6F59F194}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -99,6 +105,7 @@ Global
 		{733FDBC4-9621-430E-9803-4AC155F000AD} = {C0C5DB26-8C74-4F13-916B-D34AF75B738E}
 		{B4C68F71-3123-4BD2-8FCD-8259A28D7A67} = {733FDBC4-9621-430E-9803-4AC155F000AD}
 		{6C11ABE1-984B-451C-ABD8-C40F88C8BB96} = {733FDBC4-9621-430E-9803-4AC155F000AD}
+		{4D87B443-E493-4CEB-91E6-966E6F59F194} = {733FDBC4-9621-430E-9803-4AC155F000AD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2F46A118-939D-48ED-BFB5-D148BBEAD6B3}
