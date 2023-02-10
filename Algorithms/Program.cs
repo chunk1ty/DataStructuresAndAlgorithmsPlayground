@@ -1,6 +1,4 @@
-﻿using Algorithms.Combinatorics;
-using Algorithms.MatchingBrackets;
-using Algorithms.Sorting;
+﻿using Algorithms.MatchingBrackets;
 using BenchmarkDotNet.Running;
 
 namespace Algorithms

@@ -1,10 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Algorithms.Sorting;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Algorithms.Tests.Sorting
+namespace Sorting
 {
     [TestClass]
     public class InsertionSorterTests

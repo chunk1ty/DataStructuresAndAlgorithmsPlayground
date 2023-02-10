@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Algorithms.Combinatorics
+﻿namespace Combinatorics
 {
     // How many ways are there to pick 2 different letters out of 4 letters?
     public class Combinator

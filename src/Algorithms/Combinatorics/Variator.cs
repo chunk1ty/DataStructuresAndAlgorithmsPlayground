@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Algorithms.Combinatorics
+﻿namespace Combinatorics
 {
     // How many words of 2 letters can you make with 4 letters? 
     public class Variator

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Algorithms.Combinatorics
+﻿namespace Combinatorics
 {
     // https://stackoverflow.com/questions/756055/listing-all-permutations-of-a-string-integer
     // How many ways are there to arrange 3 letters?
