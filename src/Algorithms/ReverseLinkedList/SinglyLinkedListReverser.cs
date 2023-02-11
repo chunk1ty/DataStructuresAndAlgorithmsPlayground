@@ -20,7 +20,7 @@ public class SinglyLinkedListReverser
         {
             // next -> 2
             next = head.Next;
-            // 1 x 2 | on second iteration reverse the arrow 1 <- 2
+            // null <- 1  
             head.Next = prev;
             // prev -> 1
             prev = head;

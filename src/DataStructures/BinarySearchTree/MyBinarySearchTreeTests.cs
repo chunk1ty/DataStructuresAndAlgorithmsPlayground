@@ -318,4 +318,27 @@ public class MyBinarySearchTreeTests
 
         binarySearchTree.Root.Left.Left.Right.Value.Should().Be(12);
     }
+    
+    [Test]
+    public void IsValid_ShouldValidateBST()
+    {
+        // Arrange
+        var binarySearchTree = new MyBinarySearchTree();
+        
+        binarySearchTree.Insert(45);
+        binarySearchTree.Insert(15);
+        binarySearchTree.Insert(79);
+        binarySearchTree.Insert(90);
+        binarySearchTree.Insert(10);
+        binarySearchTree.Insert(55);
+        binarySearchTree.Insert(12);
+        binarySearchTree.Insert(20);
+        binarySearchTree.Insert(50);
+
+        // Act
+        var isValid = binarySearchTree.IsValid();
+       
+        // Assert
+        isValid.Should().BeTrue();
+    }
 }

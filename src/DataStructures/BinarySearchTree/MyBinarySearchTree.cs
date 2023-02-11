@@ -4,6 +4,27 @@ using System.Collections.Generic;
 
 namespace BinarySearchTree;
 
+internal class MyBinarySearchTreeNode
+{
+    public MyBinarySearchTreeNode(int value)
+    {
+        Left = null;
+        Right = null;
+        Value = value;
+    }
+
+    public MyBinarySearchTreeNode Left { get; set; }
+
+    public MyBinarySearchTreeNode Right { get; set; }
+
+    public int Value { get; set; }
+
+    public override string ToString()
+    {
+        return $"{Value}";
+    }
+}
+
 internal class MyBinarySearchTree : IEnumerable
 {
     private MyBinarySearchTreeNode _root;
@@ -90,7 +111,7 @@ internal class MyBinarySearchTree : IEnumerable
     {
         var result = Find(value);
 
-        return result.Node is null ? false : true;
+        return result.Node is not null;
     }
 
     private (MyBinarySearchTreeNode Node, MyBinarySearchTreeNode Parent) Find(int value)
@@ -211,6 +232,29 @@ internal class MyBinarySearchTree : IEnumerable
         }
 
         return myBinarySearchTreeNode;
+    }
+    
+    public bool IsValid()
+    {
+        return IsValid(_root, long.MinValue, long.MaxValue);
+    }
+
+    private bool IsValid(MyBinarySearchTreeNode node, long lowerBound, long upperBound)
+    {
+        if (node is null)
+        {
+            return true;
+        }
+
+        if (node.Value <= lowerBound || node.Value >= upperBound)
+        {
+            return false;
+        }
+
+        var isLeftSubTreeValid = IsValid(node.Left, lowerBound, node.Value);
+        var isRightSubTreeValid = IsValid(node.Right, node.Value, upperBound);
+
+        return isLeftSubTreeValid && isRightSubTreeValid;
     }
 
     public IEnumerator GetEnumerator()
