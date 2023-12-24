@@ -38,7 +38,7 @@ public class MyBinarySearchTreeTests
     }
 
     [Test]
-    public void TraverseInOrder_ShouldTraverseBSTProperly()
+    public void InOrder_ShouldTraverseRecursiveBSTy()
     {
         // Arrange
         var binarySearchTree = new MyBinarySearchTree();
@@ -54,7 +54,7 @@ public class MyBinarySearchTreeTests
         binarySearchTree.Insert(50);
 
         // Act
-        var items = binarySearchTree.InOrderTraversal();
+        var items = binarySearchTree.DfsInOrderRecursive();
 
         items[0].Should().Be(10);
         items[1].Should().Be(12); 
@@ -65,6 +65,187 @@ public class MyBinarySearchTreeTests
         items[6].Should().Be(55); 
         items[7].Should().Be(79); 
         items[8].Should().Be(90); 
+    }
+    
+    [Test]
+    public void InOrder_ShouldTraverseIterativeBSTProperly()
+    {
+        // Arrange
+        var binarySearchTree = new MyBinarySearchTree();
+
+        binarySearchTree.Insert(45);
+        binarySearchTree.Insert(15);
+        binarySearchTree.Insert(79);
+        binarySearchTree.Insert(90);
+        binarySearchTree.Insert(10);
+        binarySearchTree.Insert(55);
+        binarySearchTree.Insert(12);
+        binarySearchTree.Insert(20);
+        binarySearchTree.Insert(50);
+
+        // Act
+        var items = binarySearchTree.DfsInOrderIterative();
+
+        items[0].Should().Be(10);
+        items[1].Should().Be(12); 
+        items[2].Should().Be(15); 
+        items[3].Should().Be(20); 
+        items[4].Should().Be(45); 
+        items[5].Should().Be(50); 
+        items[6].Should().Be(55); 
+        items[7].Should().Be(79); 
+        items[8].Should().Be(90); 
+    }
+    
+    [Test]
+    public void PreOrder_ShouldTraverseRecursiveBST()
+    {
+        // Arrange
+        var binarySearchTree = new MyBinarySearchTree();
+
+        binarySearchTree.Insert(45);
+        binarySearchTree.Insert(15);
+        binarySearchTree.Insert(79);
+        binarySearchTree.Insert(90);
+        binarySearchTree.Insert(10);
+        binarySearchTree.Insert(55);
+        binarySearchTree.Insert(12);
+        binarySearchTree.Insert(20);
+        binarySearchTree.Insert(50);
+
+        // Act
+        var items = binarySearchTree.DfsPreOrderRecursive();
+
+        items[0].Should().Be(45);
+        items[1].Should().Be(15); 
+        items[2].Should().Be(10); 
+        items[3].Should().Be(12); 
+        items[4].Should().Be(20); 
+        items[5].Should().Be(79); 
+        items[6].Should().Be(55); 
+        items[7].Should().Be(50); 
+        items[8].Should().Be(90); 
+    }
+    
+    [Test]
+    public void PreOrder_ShouldTraverseIterativeBST()
+    {
+        // Arrange
+        var binarySearchTree = new MyBinarySearchTree();
+
+        binarySearchTree.Insert(45);
+        binarySearchTree.Insert(15);
+        binarySearchTree.Insert(79);
+        binarySearchTree.Insert(90);
+        binarySearchTree.Insert(10);
+        binarySearchTree.Insert(55);
+        binarySearchTree.Insert(12);
+        binarySearchTree.Insert(20);
+        binarySearchTree.Insert(50);
+
+        // Act
+        var items = binarySearchTree.DfsPreOrderIterative();
+
+        items[0].Should().Be(45);
+        items[1].Should().Be(15); 
+        items[2].Should().Be(10); 
+        items[3].Should().Be(12); 
+        items[4].Should().Be(20); 
+        items[5].Should().Be(79); 
+        items[6].Should().Be(55); 
+        items[7].Should().Be(50); 
+        items[8].Should().Be(90); 
+    }
+    
+    [Test]
+    public void PostOrder_ShouldTraverseRecursiveBST()
+    {
+        // Arrange
+        var binarySearchTree = new MyBinarySearchTree();
+
+        binarySearchTree.Insert(45);
+        binarySearchTree.Insert(15);
+        binarySearchTree.Insert(79);
+        binarySearchTree.Insert(90);
+        binarySearchTree.Insert(10);
+        binarySearchTree.Insert(55);
+        binarySearchTree.Insert(12);
+        binarySearchTree.Insert(20);
+        binarySearchTree.Insert(50);
+
+        // Act
+        var items = binarySearchTree.DfsPostOrderRecursive();
+
+        items[0].Should().Be(12);
+        items[1].Should().Be(10); 
+        items[2].Should().Be(20); 
+        items[3].Should().Be(15); 
+        items[4].Should().Be(50); 
+        items[5].Should().Be(55); 
+        items[6].Should().Be(90); 
+        items[7].Should().Be(79); 
+        items[8].Should().Be(45); 
+    }
+    
+    [Test]
+    public void PostOrder_ShouldTraverseIterativeBST()
+    {
+        // Arrange
+        var binarySearchTree = new MyBinarySearchTree();
+
+        binarySearchTree.Insert(45);
+        binarySearchTree.Insert(15);
+        binarySearchTree.Insert(79);
+        binarySearchTree.Insert(90);
+        binarySearchTree.Insert(10);
+        binarySearchTree.Insert(55);
+        binarySearchTree.Insert(12);
+        binarySearchTree.Insert(20);
+        binarySearchTree.Insert(50);
+
+        // Act
+        var items = binarySearchTree.DfsPostOrderIterative();
+
+        items[0].Should().Be(12);
+        items[1].Should().Be(10); 
+        items[2].Should().Be(20); 
+        items[3].Should().Be(15); 
+        items[4].Should().Be(50); 
+        items[5].Should().Be(55); 
+        items[6].Should().Be(90); 
+        items[7].Should().Be(79); 
+        items[8].Should().Be(45); 
+    }
+    
+    [Test]
+    public void Bfs_ShouldTraverseBST()
+    {
+        // Arrange
+        var binarySearchTree = new MyBinarySearchTree();
+
+        binarySearchTree.Insert(45);
+        binarySearchTree.Insert(15);
+        binarySearchTree.Insert(79);
+        binarySearchTree.Insert(90);
+        binarySearchTree.Insert(10);
+        binarySearchTree.Insert(55);
+        binarySearchTree.Insert(12);
+        binarySearchTree.Insert(20);
+        binarySearchTree.Insert(50);
+
+        // Act
+        var items = binarySearchTree.Bfs();
+
+        items.Count.Should().Be(4);
+        items[0][0].Should().Be(45);
+        items[1][0].Should().Be(15);
+        items[1][1].Should().Be(79);
+        items[2][0].Should().Be(10);
+        items[2][1].Should().Be(20);
+        items[2][2].Should().Be(55);
+        items[2][3].Should().Be(90);
+        items[3][0].Should().Be(12);
+        items[3][1].Should().Be(50);
     }
 
     [Test]
