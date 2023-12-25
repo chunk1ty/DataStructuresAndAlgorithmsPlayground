@@ -9,6 +9,7 @@ public class MyHashMap<TKey, TValue> : IEnumerable<KeyValuePair<TKey, TValue>>
     private const int DefaultCapacity = 16;
     private const float LoadFactor = 0.75f;
 
+    // could be implemented with Binary Search Tree
     private MySinglyLinkedList<KeyValuePair<TKey, TValue>>[] _buckets;
     private int _count;
 
