@@ -1,24 +1,22 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using SinglyLinkedList;
 
-namespace Dictionary;
+namespace HashMap;
 
-public class MyDictionary<TKey, TValue> : IEnumerable<KeyValuePair<TKey, TValue>>
+public class MyHashMap<TKey, TValue> : IEnumerable<KeyValuePair<TKey, TValue>>
 {
     private const int DefaultCapacity = 16;
     private const float LoadFactor = 0.75f;
 
     private MySinglyLinkedList<KeyValuePair<TKey, TValue>>[] _buckets;
-    private int _elementsCounter;
+    private int _count;
 
-    public MyDictionary() 
-        : this(DefaultCapacity)
+    public MyHashMap() : this(DefaultCapacity)
     {
     }
 
-    public MyDictionary(int capacity)
+    public MyHashMap(int capacity)
     {
         if (capacity <= 0)
         {
@@ -26,10 +24,10 @@ public class MyDictionary<TKey, TValue> : IEnumerable<KeyValuePair<TKey, TValue>
         }
 
         _buckets = new MySinglyLinkedList<KeyValuePair<TKey, TValue>>[capacity];
-        _elementsCounter = 0;
+        _count = 0;
     }
 
-    public int Count => _elementsCounter;
+    public int Count => _count;
 
     public TValue this[TKey key]
     {
@@ -42,23 +40,20 @@ public class MyDictionary<TKey, TValue> : IEnumerable<KeyValuePair<TKey, TValue>
             }
 
             throw new ArgumentException($"The given key '{key}' was not present in the dictionary");
-        } 
-
-        set => Add(key, value);
+        }
     }
 
     public void Add(TKey key, TValue value)
     {
-        Resize();
+        ReHash();
 
-        var pairToAdd = new KeyValuePair<TKey, TValue>(key, value);
+        var newPair = new KeyValuePair<TKey, TValue>(key, value);
+        uint hashKey = GetHashKey(key);
 
-        uint index = GetBucketIndex(key);
-
-        if (_buckets[index] is null)
+        if (_buckets[hashKey] is null)
         {
-            _buckets[index] = new MySinglyLinkedList<KeyValuePair<TKey, TValue>>();
-            _buckets[index].AddToTail(pairToAdd);
+            _buckets[hashKey] = new MySinglyLinkedList<KeyValuePair<TKey, TValue>>();
+            _buckets[hashKey].AddToTail(newPair);
         }
         else
         {
@@ -68,39 +63,19 @@ public class MyDictionary<TKey, TValue> : IEnumerable<KeyValuePair<TKey, TValue>
                 throw new ArgumentException($"An item with the same key has already been added '{key}'");
             }
 
-            _buckets[index].AddToTail(pairToAdd);
+            _buckets[hashKey].AddToTail(newPair);
         }
+
+        _count++;
         
-        _elementsCounter++;
-    }
-
-    public void Remove(TKey key)
-    {
-        uint bucketIndex = GetBucketIndex(key);
-
-        bool match = Find(key, out KeyValuePair<TKey, TValue> pair);
-        if (!match)
+        void ReHash()
         {
-            return;
-        }
-
-        _buckets[bucketIndex].Remove(pair);
-        _elementsCounter--;
-    }
-
-    public void Clear()
-    {
-        _buckets = new MySinglyLinkedList<KeyValuePair<TKey, TValue>>[DefaultCapacity];
-        _elementsCounter = 0;
-    }
-
-
-    private void Resize()
-    {
-        if (_elementsCounter >= _buckets.Length * LoadFactor)
-        {
-            var newHashTable = new MyDictionary<TKey, TValue>(_buckets.Length * 2);
-
+            if (_count < _buckets.Length * LoadFactor)
+            {
+                return;
+            }
+            
+            var newHashTable = new MyHashMap<TKey, TValue>(_buckets.Length * 2);
             foreach (var pair in this)
             {
                 newHashTable.Add(pair.Key, pair.Value);
@@ -110,6 +85,25 @@ public class MyDictionary<TKey, TValue> : IEnumerable<KeyValuePair<TKey, TValue>
         }
     }
 
+    public void Remove(TKey key)
+    {
+        bool match = Find(key, out KeyValuePair<TKey, TValue> pair);
+        if (!match)
+        {
+            return;
+        }
+        
+        uint hashKey = GetHashKey(key);
+        _buckets[hashKey].Remove(pair);
+        _count--;
+    }
+
+    public void Clear()
+    {
+        _buckets = new MySinglyLinkedList<KeyValuePair<TKey, TValue>>[DefaultCapacity];
+        _count = 0;
+    }
+
     private bool Find(TKey key, out KeyValuePair<TKey, TValue> pair)
     {
         if (key is null)
@@ -117,28 +111,29 @@ public class MyDictionary<TKey, TValue> : IEnumerable<KeyValuePair<TKey, TValue>
             throw new ArgumentNullException(nameof(key));
         }
 
-        uint position = GetBucketIndex(key);
-
-        if (_buckets[position] is null)
+        uint hashKey = GetHashKey(key);
+        if (_buckets[hashKey] is null)
         {
             pair = default;
             return false;
         }
 
-        foreach (KeyValuePair<TKey, TValue> item in _buckets[position])
+        foreach (KeyValuePair<TKey, TValue> keyValuePair in _buckets[hashKey])
         {
-            if (item.Key.Equals(key))
+            if (!keyValuePair.Key.Equals(key))
             {
-                pair = item;
-                return true;
+                continue;
             }
+
+            pair = keyValuePair;
+            return true;
         }
 
         pair = default;
         return false;
     }
 
-    private uint GetBucketIndex(TKey key)
+    private uint GetHashKey(TKey key)
     {
         return (uint)key.GetHashCode() % (uint)_buckets.Length;
     }
@@ -164,4 +159,3 @@ public class MyDictionary<TKey, TValue> : IEnumerable<KeyValuePair<TKey, TValue>
         return GetEnumerator();
     }
 }
-
